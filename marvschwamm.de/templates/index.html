@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Server</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<!-- 🌄 Background -->
+<div id="bg"></div>
+<div id="overlay"></div>
+
+<div id="settings-btn">⚙️</div>
+
+<div id="settings-overlay"></div>
+
+<div id="settings-panel" class="hidden glass">
+    <div id="settings-header">Settings</div>
+
+    <button onclick="loadLanguage('de')">DE</button>
+    <button onclick="loadLanguage('en')">EN</button>
+</div>
+
+<!-- 🧠 Main Content -->
+<div class="glass">
+    <div class="title" id="title">Loading...</div>
+    <div class="tag">FastAPI</div>
+    <div class="tag">Python</div>
+</div>
+
+<!-- JS -->
+<script src="/static/js/settings.js"></script>
+
+</body>
+</html>

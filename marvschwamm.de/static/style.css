@@ -1,0 +1,182 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: Arial;
+    color: white;
+}
+
+#bg {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+
+    background-size: cover;
+    background-position: center;
+
+    z-index: -2;
+}
+
+#overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+
+    background: radial-gradient(circle at top left,
+        #2d1b4e,
+        #070010 60%);
+
+    opacity: 0.85;
+
+    z-index: -1;
+}
+
+#settings-btn {
+    z-index: 1000;
+}
+
+#settings-panel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 520px;
+    height: 320px;
+
+    display: none;
+    z-index: 9999;
+    overflow: hidden;
+}
+
+#settings-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    display: none;
+    z-index: 9998;
+}
+
+#settings-header {
+    padding: 10px;
+    cursor: grab;
+    user-select: none;
+}
+
+#settings-body {
+    display: flex;
+    height: 100%;
+}
+
+#settings-sidebar {
+    width: 160px;
+    padding: 10px;
+}
+
+.cat {
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.cat:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+.cat.active {
+    background: rgba(159,107,255,0.3);
+}
+
+.tab {
+    display: none;
+    padding: 10px;
+}
+
+.tab.active {
+    display: block;
+}
+
+.glass {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    padding: 30px;
+
+    border-radius: 28px;
+
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(18px);
+
+    border: 1px solid rgba(255,255,255,0.08);
+    z-index: 10;
+}
+
+.title {
+    font-size: 4rem;
+    font-weight: 900;
+
+    margin-bottom: 20px;
+
+    background: linear-gradient(90deg, white, #9f6bff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.tag {
+    display: inline-block;
+    padding: 10px 18px;
+    margin: 5px;
+    border-radius: 999px;
+
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* ⚙️ Settings */
+#settings {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+#settings-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+
+    font-size: 2rem;
+    cursor: pointer;
+
+    z-index: 9999; /* 🔥 GANZ WICHTIG */
+}
+
+#menu {
+    display: none;
+    position: absolute;
+    right: 0;
+
+    background: rgba(0,0,0,0.7);
+    padding: 10px;
+
+    border-radius: 10px;
+}
+
+#settings:hover #menu {
+    display: block;
+}
+
+#menu button {
+    display: block;
+    margin: 5px 0;
+
+    background: none;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
