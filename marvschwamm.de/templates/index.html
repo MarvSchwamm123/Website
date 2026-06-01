@@ -14,15 +14,53 @@
 <div id="bg"></div>
 <div id="overlay"></div>
 
-<div id="settings-btn" onclick="openSettingsWindow">⚙</div>
+<div id="settings-btn" onclick="openSettingsWindow()">⚙</div>
 
 <div id="settings-overlay"></div>
 
-<div id="settings-panel" class="hidden glass">
-    <div id="settings-header">Settings</div>
+<div id="settings-panel" class="glass">
 
-    <button onclick="loadLanguage('de')">DE</button>
-    <button onclick="loadLanguage('en')">EN</button>
+    <div id="settings-header">
+        ⚙️ Einstellungen
+    </div>
+
+    <div id="settings-body">
+
+        <!-- Linke Leiste -->
+        <div id="settings-sidebar">
+
+            <div class="category active" onclick="showTab('language')">
+                🌍 Sprache
+            </div>
+
+            <div class="category" onclick="showTab('theme')">
+                🎨 Theme
+            </div>
+        </div>
+
+        <!-- Rechter Bereich -->
+        <div id="settings-content">
+
+            <div class="tab" id="language-tab">
+                <h2>Sprache</h2>
+
+                <button onclick="loadLanguage('de')">
+                    Deutsch
+                </button>
+
+                <button onclick="loadLanguage('en')">
+                    English
+                </button>
+            </div>
+
+            <div class="tab" id="theme-tab" style="display:none;">
+                <h2>Theme</h2>
+
+                <button>Dunkel</button>
+                <button>Hell</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- 🧠 Main Content -->

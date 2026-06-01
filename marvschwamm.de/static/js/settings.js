@@ -1,3 +1,12 @@
+const panel = document.getElementById("settings-panel");
+const header = document.getElementById("settings-header");
+
+let dragging = false;
+let offsetX = 0;
+let offsetY = 0;
+
+let settingsOpen = false;
+
 let images = [];
 let currentLang = "de";
 
@@ -60,6 +69,10 @@ window.addEventListener("DOMContentLoaded", () => {
 // =========================
 // 🌍 LANGUAGE
 // =========================
+function testClick() {
+    alert("Button funktioniert!");
+}
+
 async function loadLanguage(lang) {
     try {
         const res = await fetch(`/static/languages/${lang}.json`);
@@ -156,18 +169,36 @@ function setupDrag() {
     });
 }
 
-function openSettingsWindow() {
-    document.getElementById("settings-panel").classList.remove("hidden");
+function showTab(tab) {
+
+    document.getElementById("language-tab").style.display = "none";
+    document.getElementById("theme-tab").style.display = "none";
+
+    document.getElementById(tab + "-tab").style.display = "block";
+
+    document.querySelectorAll(".category").forEach(cat => {
+        cat.classList.remove("active");
+    });
+
+    event.target.classList.add("active");
 }
 
-function closeSettingsWindow() {
-    document.getElementById("settings-panel").classList.add("hidden");
+function pressOnSettingsWindow() {
+    alert("Settings Button funktioniert!");
+    if (settingsOpen) {
+        document.getElementById("settings-panel").style.display = "none";
+        settingsOpen = false;
+    } 
+    else {
+        document.getElementById("settings-panel").style.display = "block";
+        settingsOpen = true;
+    }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("settings-btn")
-        .addEventListener("click", openSettingsWindow);
+        .addEventListener("click", pressOnSettingsWindow);
 
     document.getElementById("settings-overlay")
-        .addEventListener("click", closeSettingsWindow);
+        .addEventListener("click", pressOnSettingsWindow);
 });
