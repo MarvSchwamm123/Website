@@ -1,15 +1,36 @@
-const panel = document.getElementById("settings-panel");
 const header = document.getElementById("settings-header");
 
-let dragging = false;
-let offsetX = 0;
-let offsetY = 0;
+let images = [];
+let currentLang = "en";
+loadLanguage('en');
 
 let settingsOpen = false;
+/*
+header.addEventListener("mousedown", (e) => {
+    dragging = true;
 
-let images = [];
-let currentLang = "de";
+    const rect = panel.getBoundingClientRect();
 
+    panel.style.transform = "none";
+
+    panel.style.left = rect.left + "px";
+    panel.style.top = rect.top + "px";
+
+    offsetX = e.clientX - rect.left;
+    offsetY = e.clientY - rect.top;
+});
+
+document.addEventListener("mousemove", (e) => {
+    if (!dragging) return;
+
+    windowEl.style.left = (e.clientX - offsetX) + "px";
+    windowEl.style.top = (e.clientY - offsetY) + "px";
+});
+
+document.addEventListener("mouseup", () => {
+    dragging = false;
+});
+*/
 // =========================
 // 🚀 INIT (ALLES HIER DRIN!)
 // =========================
@@ -19,7 +40,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const panel = document.getElementById("settings-panel");
     const overlay = document.getElementById("settings-overlay");
 
-    const cats = document.querySelectorAll(".cat");
+    const cats = document.querySelectorAll(".category");
     const tabs = document.querySelectorAll(".tab");
 
     // -------------------------
@@ -69,8 +90,9 @@ window.addEventListener("DOMContentLoaded", () => {
 // =========================
 // 🌍 LANGUAGE
 // =========================
-function testClick() {
-    alert("Button funktioniert!");
+
+function returnText() {
+    return "hello world";
 }
 
 async function loadLanguage(lang) {
@@ -138,20 +160,22 @@ function nextImage() {
 // 🪟 DRAG WINDOW
 // =========================
 function setupDrag() {
-
     const panel = document.getElementById("settings-panel");
     const header = document.getElementById("settings-header");
-
-    if (!panel || !header) return;
 
     let dragging = false;
     let offsetX = 0;
     let offsetY = 0;
 
     header.addEventListener("mousedown", (e) => {
-        dragging = true;
 
         const rect = panel.getBoundingClientRect();
+
+        console.log("Maus:", e.clientX, e.clientY);
+        console.log("Fenster:", rect.left, rect.top);
+        console.log("Offset:", e.clientX - rect.left, e.clientY - rect.top);
+
+        dragging = true;
 
         offsetX = e.clientX - rect.left;
         offsetY = e.clientY - rect.top;
@@ -159,6 +183,11 @@ function setupDrag() {
 
     document.addEventListener("mousemove", (e) => {
         if (!dragging) return;
+
+        console.log(
+            e.clientX - offsetX,
+            e.clientY - offsetY
+        )
 
         panel.style.left = (e.clientX - offsetX) + "px";
         panel.style.top = (e.clientY - offsetY) + "px";
@@ -184,12 +213,10 @@ function showTab(tab) {
 }
 
 function pressOnSettingsWindow() {
-    alert("Settings Button funktioniert!");
     if (settingsOpen) {
         document.getElementById("settings-panel").style.display = "none";
         settingsOpen = false;
-    } 
-    else {
+    } else {
         document.getElementById("settings-panel").style.display = "block";
         settingsOpen = true;
     }

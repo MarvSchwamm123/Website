@@ -35,18 +35,12 @@ html, body {
 
 #settings-panel {
     display: none;
-
     position: fixed;
 
-    top: 50%;
-    left: 50%;
+    width: 700px;
+    height: 450px;
 
-    transform: translate(-50%, -50%);
-
-    width: 800px;
-    height: 500px;
-
-    z-index: 10000;
+    z-index: 1000;
 }
 
 #settings-header {
