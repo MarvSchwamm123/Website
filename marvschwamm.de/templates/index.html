@@ -10,69 +10,87 @@
 
 <body>
 
-<!-- 🌄 Background -->
-<div id="bg"></div>
-<div id="overlay"></div>
 
-<div id="settings-btn">⚙</div>
+    <div id="bg"></div>
+    <div id="overlay"></div>
 
-<div id="settings-overlay"></div>
 
-<div id="settings-panel" class="glass">
+    <div id="settings-btn">⚙</div>
 
-    <div id="settings-header">
-        ⚙️ Einstellungen
-    </div>
+    <div id="settings-overlay"></div>
 
-    <div id="settings-body">
+    <div id="settings-panel" class="glass">
 
-        <!-- Linke Leiste -->
-        <div id="settings-sidebar">
+        <div id="settings-header">
+            ⚙️ Einstellungen
+        </div>
 
-            <div class="category active" onclick="showTab('language')">
-                🌍 Sprache
+        <div id="settings-body">
+
+            <!-- Linke Leiste -->
+            <div id="settings-sidebar">
+
+                <div id="settings-sidebar-language" class="category active" onclick="showTab('language')">
+                    Loading...
+                </div>
+
+                <div id="settings-sidebar-theme" class="category" onclick="showTab('theme')">
+                    Loading...
+                </div>
             </div>
 
-            <div class="category" onclick="showTab('theme')">
-                🎨 Theme
+            <!-- Rechter Bereich -->
+            <div id="settings-content">
+
+                <div class="tab" id="language-tab">
+                    <h2 id="settings-body-language">
+                        Loading...
+                    </h2>
+
+                    <button onclick="loadLanguage('de')">
+                        Deutsch
+                    </button>
+
+                    <button onclick="loadLanguage('en')">
+                        English
+                    </button>
+                </div>
+
+                <div class="tab" id="theme-tab" style="display:none;">
+                    <h2 id="settings-body-theme">
+                        Loading...
+                    </h2>
+
+                    <button>Dunkel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 🧠 Main Content -->
+    <div>
+        <div id="home" class="section">
+            <div class="glass">
+                <div class="title" id="title">Loading...</div>
+                <div class="tag">FastAPI</div>
+                <div class="tag">Python</div>
+                <div class="tag">Webserver</div>
+                <div class="tag">HTML</div>
+                <div class="tag">Gaming</div>
             </div>
         </div>
 
-        <!-- Rechter Bereich -->
-        <div id="settings-content">
-
-            <div class="tab" id="language-tab">
-                <h2>Sprache</h2>
-
-                <button onclick="loadLanguage('de')">
-                    Deutsch
-                </button>
-
-                <button onclick="loadLanguage('en')">
-                    English
-                </button>
-            </div>
-
-            <div class="tab" id="theme-tab" style="display:none;">
-                <h2>Theme</h2>
-
-                <button>Dunkel</button>
+        <div id="about" class="section">
+            <div class="glass">
+                <h2 id="aboutme-title">About Me</h2>
+                <p id="aboutme-text"></p>
             </div>
         </div>
     </div>
-</div>
 
-<!-- 🧠 Main Content -->
-<div class="glass">
-    <div class="title" id="title">Wilkommen auf marvschwamm.de</div>
-    <div class="tag">FastAPI</div>
-    <div class="tag">Python</div>
-    <div class="tag">Webserver</div>
-    <div class="tag">HTML</div>
-</div>
-
-<!-- JS -->
-<script src="/static/js/settings.js"></script>
+    <!-- JS -->
+    <script src="/static/js/settings.js"></script>
 
 </body>
+
 </html>

@@ -5,7 +5,7 @@ html, body {
     height: 100%;
     overflow: hidden;
     font-family: Arial;
-    color: white;
+    color: rgb(255, 254, 254);
 }
 
 #bg {
@@ -126,10 +126,12 @@ html, body {
 }
 
 .glass {
-    position: absolute;
+    position: relative;
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateY(-50%);
+
+    width: 60vw;
+    margin: 0 auto;
 
     padding: 30px;
 
@@ -142,13 +144,22 @@ html, body {
     z-index: 10;
 }
 
+.section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative; /* wichtig: NICHT absolute */
+}
+
 .title {
     font-size: 4rem;
     font-weight: 900;
 
     margin-bottom: 20px;
 
-    background: linear-gradient(90deg, white, #9f6bff);
+    background: linear-gradient(90deg, rgb(255, 255, 255), rgb(140, 85, 241));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }

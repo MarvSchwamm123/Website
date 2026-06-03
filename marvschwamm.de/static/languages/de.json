@@ -1,5 +1,8 @@
 {
-    "title": "Willkommen auf dem Server",
-    
-    "settings": "Einstellungen"
+    "title": "Wilkommen auf marvschwamm.de",
+    "settings": "Einstellungen",
+    "language": "Sprache",
+    "theme": "Thema",
+    "aboutme_title": "Über mich",
+    "aboutme_text": "blablalba"
 }

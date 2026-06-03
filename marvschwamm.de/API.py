@@ -22,5 +22,5 @@ def get_images():
     return [
         f"/static/images/{img}"
         for img in files
-        if img.endswith((".png", ".jpg", ".jpeg", ".webp"))
+        if img.endswith((".png", ".jpg", ".jpeg", ".webp", ".JPG"))
     ]

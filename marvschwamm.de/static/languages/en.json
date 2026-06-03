@@ -1,4 +1,8 @@
 {
-    "title": "Welcome to the server",
-    "settings": "Settings"
+    "title": "Welcome to marvschwamm.de",
+    "settings": "Settings",
+    "language": "Language",
+    "theme": "Theme",
+    "aboutme_title": "About Me",
+    "aboutme_text": "blablabla"
 } 

@@ -2,9 +2,11 @@ const header = document.getElementById("settings-header");
 
 let images = [];
 let currentLang = "en";
-loadLanguage('en');
+let langData = {};
 
 let settingsOpen = false;
+
+loadLanguage('en');
 /*
 header.addEventListener("mousedown", (e) => {
     dragging = true;
@@ -13,7 +15,7 @@ header.addEventListener("mousedown", (e) => {
 
     panel.style.transform = "none";
 
-    panel.style.left = rect.left + "px";
+    panel.style.left = rect.left + "loadLanguage";
     panel.style.top = rect.top + "px";
 
     offsetX = e.clientX - rect.left;
@@ -91,22 +93,44 @@ window.addEventListener("DOMContentLoaded", () => {
 // 🌍 LANGUAGE
 // =========================
 
-function returnText() {
-    return "hello world";
+function updateTexts() {
+    console.log("updateTexts gestartet");
+
+    console.log(langData);
+
+    console.log(document.getElementById("settings-body-language"));
+    console.log(document.getElementById("settings-body-theme"));
+
+    document.getElementById("settings-sidebar-language").innerText = document.getElementById("settings-body-language").innerText =
+        "🌍 " + t("language");
+
+    document.getElementById("settings-sidebar-theme").innerText = document.getElementById("settings-body-theme").innerText =
+        "🎨 " + t("theme");
+
+    document.getElementById("settings-header").innerText =
+        "⚙️ " + t("settings");
+
+    document.getElementById("title").innerText =
+        t("title");
+
+    document.getElementById("aboutme-title").innerText =
+        t("aboutme_title");
+
+    document.getElementById("aboutme-text").innerText =
+        t("aboutme_text");
 }
 
 async function loadLanguage(lang) {
-    try {
-        const res = await fetch(`/static/languages/${lang}.json`);
-        const data = await res.json();
+    console.log("Lade Sprache:", lang);
+    localStorage.setItem("lang", lang);
+    const res = await fetch(`/static/languages/${localStorage.getItem("lang")}.json`);
+    langData = await res.json();
 
-        document.getElementById("title").innerText = data.title;
+    updateTexts();
+}
 
-        localStorage.setItem("lang", lang);
-        currentLang = lang;
-    } catch (err) {
-        console.error("Language load failed:", err);
-    }
+function t(key) {
+    return langData[key] || ("KEY NOT FOUND: " + key);
 }
 
 // =========================
