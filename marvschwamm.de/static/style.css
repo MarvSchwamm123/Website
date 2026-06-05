@@ -3,9 +3,20 @@ html, body {
     padding: 0;
     width: 100%;
     height: 100%;
-    overflow: hidden;
     font-family: Arial;
     color: rgb(255, 254, 254);
+}
+
+#content {
+    display: flex;
+    flex-direction: column; /* untereinander */
+
+    align-items: center;    /* horizontal zentriert */
+
+    gap: 5%;              /* Abstand zwischen Inseln */
+
+    padding-top: 100px;
+    padding-bottom: 100px;
 }
 
 #bg {
@@ -127,8 +138,6 @@ html, body {
 
 .glass {
     position: relative;
-    top: 50%;
-    transform: translateY(-50%);
 
     width: 60vw;
     margin: 0 auto;
@@ -145,12 +154,11 @@ html, body {
 }
 
 .section {
-    min-height: 100vh;
     display: flex;
-    align-items: center;
     justify-content: center;
 
-    position: relative; /* wichtig: NICHT absolute */
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
 .title {
