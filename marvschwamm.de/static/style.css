@@ -203,6 +203,21 @@ html, body {
     z-index: 9999; /* 🔥 GANZ WICHTIG */
 }
 
+#aboutme-link {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 12px;
+
+    color: white;
+    text-decoration: none;
+
+    transition: background 0.3s, border-color 0.3s;
+}
+
 #menu {
     display: none;
     position: absolute;
@@ -227,3 +242,5 @@ html, body {
     border: none;
     cursor: pointer;
 }
+
+

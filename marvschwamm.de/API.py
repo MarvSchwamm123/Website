@@ -24,3 +24,9 @@ def get_images():
         for img in files
         if img.endswith((".png", ".jpg", ".jpeg", ".webp", ".JPG"))
     ]
+
+@app.get("/aboutme")
+def aboutme():
+    return FileResponse(
+        os.path.join(BASE_DIR, "templates", "aboutme.html")
+    )

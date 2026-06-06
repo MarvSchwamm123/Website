@@ -6,6 +6,9 @@
     <title>Server</title>
 
     <link rel="stylesheet" href="/static/style.css">
+
+    <script src="//unpkg.com/three"></script>
+    <script src="//unpkg.com/globe.gl"></script>
 </head>
 
 <body>
@@ -73,7 +76,7 @@
             <div class="glass">
                 <div class="title" id="title">Loading...</div>
                 <div class="tag">FastAPI</div>
-                <div class="tag">Python</div>
+                <div class="tag">Python</div> 
                 <div class="tag">Webserver</div>
                 <div class="tag">HTML</div>
                 <div class="tag">Gaming</div>
@@ -82,18 +85,27 @@
         <div id="about" class="section">
             <div class="glass">
                 <h1>About Me</h1>
+
+                <p id="aboutme-text">
+                    Loading...
+                </p>
+
+                <div id="aboutme-link" onclick="window.location='/aboutme'">
+                    About Me öffnen
+                </div>
             </div>
         </div>
         <div id="projects" class="section">
             <div class="glass">
                 <h1>Projects</h1>
             </div>
-        </div>
+        </div> 
 
     </div>
 
     <!-- JS -->
     <script src="/static/js/settings.js"></script>
+    <script src="/static/js/text.js"></script>
 
 </body>
 

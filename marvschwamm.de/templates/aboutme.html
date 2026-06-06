@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>About Me</title>
+
+  <link rel="stylesheet" href="/static/aboutme.css" />
+
+  <!-- MUSS VOR DEM MODULE KOMMEN -->
+  <script src="https://unpkg.com/topojson-client@3"></script>
+</head>
+
+<body>
+
+  <div id="globe-container"></div>
+
+  <div id="overlay"></div>
+
+  <div id="content">
+    <div class="glass">
+      <h1 id="aboutme-title">Loading...</h1>
+      <p id="aboutme-content">Loading...</p>
+    </div>
+  </div>
+
+  <!-- DEIN THREE.JS CODE -->
+  <script type="module" src="/static/js/aboutme.js"></script>
+  <script src="/static/js/text.js"></script>
+
+</body>
+
+</html>

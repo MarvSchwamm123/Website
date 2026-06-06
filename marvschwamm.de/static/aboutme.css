@@ -1,0 +1,99 @@
+/* =========================
+   🌍 ABOUT ME PAGE
+========================= */
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+
+    min-height: 100vh;
+
+    color: white;
+    font-family: Arial, sans-serif;
+
+    overflow-x: hidden;
+}
+
+/* Globus-Hintergrund */
+#globe-container {
+    position: fixed;
+    inset: 0;
+
+    z-index: -10;
+}
+
+/* Dunkles Overlay */
+#overlay {
+    position: fixed;
+    inset: 0;
+
+    background: rgba(0,0,0,0.4);
+
+    z-index: -5;
+}
+
+/* Content */
+#content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 50px;
+
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+/* Glass Card */
+.glass {
+    width: 60vw;
+    max-width: 1000px;
+
+    padding: 30px;
+
+    border-radius: 28px;
+
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(2px);
+
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* Titel */
+.page-title {
+    font-size: 4rem;
+    font-weight: 900;
+
+    margin-bottom: 20px;
+
+    background: linear-gradient(
+        180deg,
+        white,
+        #9f6bff
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Text */
+.about-text {
+    font-size: 1.2rem;
+    line-height: 1.8;
+}
+
+/* Zurück Button */
+.back-button {
+    display: inline-block;
+
+    padding: 12px 24px;
+
+    border-radius: 12px;
+
+    background: rgba(255,255,255,0.08);
+
+    color: white;
+
+    text-decoration: none;
+}
