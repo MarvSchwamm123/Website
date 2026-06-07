@@ -1,7 +1,11 @@
-lang = "en"
+lang = ""
 
-localStorage.setItem("lang") = lang
-
+try{
+    lang = localStorage.getItem("lang");
+} catch {
+    lang = "en"
+    localStorage.setItem("lang") = lang
+}
 let langData = {};
 
 loadLanguage(localStorage.getItem("lang"));

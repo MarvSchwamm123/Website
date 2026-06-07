@@ -1,6 +1,8 @@
 const header = document.getElementById("settings-header");
 let images = [];
 let settingsOpen = false;
+
+
 /*
 header.addEventListener("mousedown", (e) => {
     dragging = true;
