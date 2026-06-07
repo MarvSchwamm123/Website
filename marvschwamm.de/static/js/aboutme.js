@@ -109,3 +109,11 @@ function animate() {
 }
 
 animate();
+
+const homeBtn = document.getElementById("home-btn");
+
+if (homeBtn) {
+    homeBtn.addEventListener("click", () => {
+        window.location.href = "/";
+    });
+}

@@ -30,3 +30,7 @@ def aboutme():
     return FileResponse(
         os.path.join(BASE_DIR, "templates", "aboutme.html")
     )
+
+@app.get("/gettext")
+def returnText():
+    pass

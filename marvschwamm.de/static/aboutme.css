@@ -84,16 +84,26 @@ body {
 }
 
 /* Zurück Button */
-.back-button {
-    display: inline-block;
+#home-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
 
-    padding: 12px 24px;
+    padding: 10px 16px;
 
+    border: none;
     border-radius: 12px;
 
-    background: rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
 
     color: white;
+    font-size: 16px;
+    cursor: pointer;
 
-    text-decoration: none;
+    z-index: 9999;
+}
+
+#home-btn:hover {
+    background: rgba(255,255,255,0.25);
 }
