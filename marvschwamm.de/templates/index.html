@@ -16,10 +16,34 @@
     <div id="bg"></div>
     <div id="overlay"></div>
 
+    <!-- =========================
+     FRIDGEWISE SIDEBAR
+     ========================= -->
+
+    <div id="fridgewise-sidebar">
+
+        <div
+            id="fridgewise-button"
+            onclick="window.location='/FridgeWise'"
+        >
+            <span id="fridgewise-icon">🥕</span>
+            <span id="fridgewise-text">FridgeWise</span>
+        </div>
+
+    </div>
+
+    <!-- =========================
+         SETTINGS BUTTON
+         ========================= -->
 
     <div id="settings-btn">⚙</div>
 
     <div id="settings-overlay"></div>
+
+
+    <!-- =========================
+         SETTINGS PANEL
+         ========================= -->
 
     <div id="settings-panel" class="glass">
 
@@ -27,24 +51,53 @@
             ⚙️ Einstellungen
         </div>
 
+
         <div id="settings-body">
 
-            <!-- Linke Leiste -->
+            <!-- SIDEBAR -->
+
             <div id="settings-sidebar">
 
-                <div id="settings-sidebar-language" class="category active" onclick="showTab('language')">
-                    Loading...
+                <div
+                    id="settings-sidebar-language"
+                    class="category active"
+                    onclick="showTab('language')"
+                >
+                    language
                 </div>
 
-                <div id="settings-sidebar-theme" class="category" onclick="showTab('theme')">
-                    Loading...
+                <div
+                    id="settings-sidebar-theme"
+                    class="category"
+                    onclick="showTab('theme')"
+                >
+                    theme
                 </div>
+
+                <div
+                    id="settings-sidebar-account"
+                    class="category"
+                    onclick="showTab('account')"
+                >
+                    account
+                </div>
+
             </div>
 
-            <!-- Rechter Bereich -->
+
+            <!-- CONTENT -->
+
             <div id="settings-content">
 
-                <div class="tab" id="language-tab">
+
+                <!-- LANGUAGE -->
+
+                <div
+                    id="language-tab"
+                    class="tab"
+                    style="display:block;"
+                >
+
                     <h2 id="settings-body-language">
                         Loading...
                     </h2>
@@ -56,53 +109,293 @@
                     <button onclick="loadLanguage('en')">
                         English
                     </button>
+
                 </div>
 
-                <div class="tab" id="theme-tab" style="display:none;">
+
+                <!-- THEME -->
+
+                <div
+                    id="theme-tab"
+                    class="tab"
+                    style="display:none;"
+                >
+
                     <h2 id="settings-body-theme">
                         Loading...
                     </h2>
 
-                    <button>Dunkel</button>
+                    <button>
+                        Dunkel
+                    </button>
+
                 </div>
+
+
+                <!-- ACCOUNT -->
+
+                <div
+                    id="account-tab"
+                    class="tab"
+                    style="display:none;"
+                >
+
+                    <h2 id="settings-body-account">
+                        ⚙️ Account
+                    </h2>
+
+                    <p id="account-status">
+                        Nicht angemeldet
+                    </p>
+
+
+                    <button
+                        type="button"
+                        onclick="openLoginPanel()"
+                    >
+                        Anmelden
+                    </button>
+
+
+                    <button
+                        type="button"
+                        onclick="openRegistrationPanel()"
+                    >
+                        Registrieren
+                    </button>
+
+                </div>
+
+
             </div>
+
         </div>
+
     </div>
 
-    <!-- 🧠 Main Content -->
-    <div id="content">
-        <div id="home" class="section">
-            <div class="glass">
-                <div class="title" id="title">Loading...</div>
-                <div class="tag">FastAPI</div>
-                <div class="tag">Python</div> 
-                <div class="tag">Webserver</div>
-                <div class="tag">HTML</div>
-                <div class="tag">Gaming</div>
-            </div>
+
+    <!-- =========================
+         REGISTRATION PANEL
+         ========================= -->
+
+    <div id="registration-panel" class="glass">
+
+        <div id="registration-header">
+            📝 Registrierung
         </div>
-        <div id="about" class="section">
+
+        <div id="registration-body">
+
+            <form id="registration-form" class="account-form">
+
+                <label for="registration-username">
+                    Username
+                </label>
+
+                <input
+                    type="text"
+                    id="registration-username"
+                    placeholder="Username"
+                    required
+                >
+
+                <label for="registration-email">
+                    E-Mail
+                </label>
+
+                <input
+                    type="email"
+                    id="registration-email"
+                    placeholder="E-Mail"
+                    required
+                >
+
+                <label for="registration-password">
+                    Passwort
+                </label>
+
+                <input
+                    type="password"
+                    id="registration-password"
+                    placeholder="Passwort"
+                    required
+                >
+
+                <label for="registration-password-confirm">
+                    Passwort wiederholen
+                </label>
+
+                <input
+                    type="password"
+                    id="registration-password-confirm"
+                    placeholder="Passwort wiederholen"
+                    required
+                >
+
+                <button type="submit">
+                    Registrieren
+                </button>
+
+            </form>
+
+            <div
+                class="account-link"
+                onclick="openLoginPanel()"
+            >
+                Bereits ein Konto? Anmelden
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         LOGIN PANEL
+         ========================= -->
+
+    <div id="login-panel" class="glass">
+
+        <div id="login-header">
+            🔐 Anmelden
+        </div>
+
+        <div id="login-body">
+
+            <form id="login-form" class="account-form">
+
+                <label for="login-email">
+                    E-Mail
+                </label>
+
+                <input
+                    type="email"
+                    id="login-email"
+                    placeholder="E-Mail"
+                >
+
+
+                <label for="login-password">
+                    Passwort
+                </label>
+
+                <input
+                    type="password"
+                    id="login-password"
+                    placeholder="Passwort"
+                >
+
+
+                <button type="submit">
+                    Anmelden
+                </button>
+
+            </form>
+
+
+            <div
+                class="account-link"
+                onclick="openRegistrationPanel()"
+            >
+                Noch kein Konto? Registrieren
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         MAIN CONTENT
+         ========================= -->
+
+    <div id="content">
+
+        <!-- HOME -->
+
+        <div id="home" class="section">
+
             <div class="glass">
-                <h1>About Me</h1>
+
+                <div
+                    class="title"
+                    id="title"
+                >
+                    Loading...
+                </div>
+
+                <div class="tag">
+                    FastAPI
+                </div>
+
+                <div class="tag">
+                    Python
+                </div>
+
+                <div class="tag">
+                    Webserver
+                </div>
+
+                <div class="tag">
+                    HTML
+                </div>
+
+                <div class="tag">
+                    Gaming
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ABOUT -->
+
+        <div id="about" class="section">
+
+            <div class="glass">
+
+                <h1>
+                    About Me
+                </h1>
 
                 <p id="aboutme-text">
                     Loading...
                 </p>
 
-                <div id="aboutme-link" onclick="window.location='/aboutme'">
+                <div
+                    id="aboutme-link"
+                    onclick="window.location='/aboutme'"
+                >
                     About Me öffnen
                 </div>
+
             </div>
+
         </div>
+
+
+        <!-- PROJECTS -->
+
         <div id="projects" class="section">
+
             <div class="glass">
-                <h1>Projects</h1>
+
+                <h1>
+                    Projects
+                </h1>
+
             </div>
-        </div> 
+
+        </div>
 
     </div>
 
-    <!-- JS -->
+
+    <!-- =========================
+         JAVASCRIPT
+         ========================= -->
+
     <script src="/static/js/settings.js"></script>
     <script src="/static/js/text.js"></script>
 

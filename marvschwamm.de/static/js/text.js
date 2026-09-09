@@ -1,55 +1,195 @@
-lang = ""
+let lang = "en";
 
-try{
-    lang = localStorage.getItem("lang");
-} catch {
-    lang = "en"
-    localStorage.setItem("lang") = lang
-}
 let langData = {};
 
-loadLanguage(localStorage.getItem("lang"));
 
-console.log("TEXT.JS GELADEN");
+// =========================
+// LANGUAGE INIT
+// =========================
+
+try {
+
+    lang =
+        localStorage.getItem("lang") || "en";
+
+} catch {
+
+    lang = "en";
+
+}
+
+
+// =========================
+// LOAD LANGUAGE
+// =========================
+
+async function loadLanguage(language) {
+
+    console.log(
+        "Lade Sprache:",
+        language
+    );
+
+
+    lang = language;
+
+
+    try {
+
+        localStorage.setItem(
+            "lang",
+            language
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Language konnte nicht gespeichert werden:",
+            error
+        );
+
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+                `/static/languages/${language}.json`
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Language-Datei konnte nicht geladen werden"
+            );
+
+        }
+
+
+        langData =
+            await response.json();
+
+
+        updateTexts();
+
+
+        console.log(
+            "Sprache geladen:",
+            language
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Language load failed:",
+            error
+        );
+
+    }
+
+}
+
+
+// =========================
+// UPDATE TEXTS
+// =========================
 
 function updateTexts() {
-    console.log("TEXT Updated")
 
-    setText("settings-sidebar-language", "🌍 " + t("language"));
-    setText("settings-body-language", "🌍 " + t("language"));
+    console.log("TEXT UPDATED");
 
-    setText("settings-sidebar-theme", "🎨 " + t("theme"));
-    setText("settings-body-theme", "🎨 " + t("theme"));
 
-    setText("settings-header", "⚙️ " + t("settings"));
+    setText(
+        "settings-sidebar-language",
+        "🌍 " + t("language")
+    );
 
-    setText("title", t("title"));
+    setText(
+        "settings-body-language",
+        "🌍 " + t("language")
+    );
 
-    setText("aboutme-title", t("aboutme_title"));
-    setText("aboutme-text", t("aboutme_text"));
-    setText("aboutme-content", t("aboutme_content"));
+
+    setText(
+        "settings-sidebar-theme",
+        "🎨 " + t("theme")
+    );
+
+    setText(
+        "settings-body-theme",
+        "🎨 " + t("theme")
+    );
+
+
+    setText(
+        "settings-sidebar-account",
+        "⚙️ " + t("account")
+    );
+
+    setText(
+        "settings-body-account",
+        "⚙️ " + t("account")
+    );
+
+
+    setText(
+        "settings-header",
+        "⚙️ " + t("settings")
+    );
+
+
+    setText(
+        "title",
+        t("title")
+    );
+
+
+    setText(
+        "aboutme-title",
+        t("aboutme_title")
+    );
+
+    setText(
+        "aboutme-text",
+        t("aboutme_text")
+    );
+
+    setText(
+        "aboutme-content",
+        t("aboutme_content")
+    );
+
 }
+
+
+// =========================
+// SET TEXT
+// =========================
 
 function setText(id, text) {
-    const el = document.getElementById(id);
-    if (el) {
-        el.innerText = text;
+
+    const element =
+        document.getElementById(id);
+
+
+    if (element) {
+
+        element.innerText = text;
+
     }
+
 }
 
-async function loadLanguage(lang) {
-    console.log("Lade Sprache:", lang);
-    localStorage.setItem("lang", lang);
-    const res = await fetch(`/static/languages/${localStorage.getItem("lang")}.json`);
-    langData = await res.json();
 
-    updateTexts();
-    console.log("GANZE JSON:");
-    console.log(Object.keys(langData));
-
-    console.log("aboutme_content:", langData.aboutme_content);
-}
+// =========================
+// TRANSLATION
+// =========================
 
 function t(key) {
-    return langData[key] || ("KEY NOT FOUND: " + key);
+
+    return langData[key] || key;
+
 }

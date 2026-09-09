@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FridgeWise</title>
+
+    <link rel="stylesheet" href="/static/FridgeWise.css">
+</head>
+
+<body>
+
+    <!-- =========================
+         HEADER
+    ========================= -->
+
+    <header id="topbar">
+
+        <button id="home-btn" onclick="window.location='/'">
+            ← Home
+        </button>
+
+        <div id="logo">
+            🥕 <span>FridgeWise</span>
+        </div>
+
+        <div id="user-area">
+            👤
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         MAIN
+    ========================= -->
+
+    <main id="content">
+
+        <!-- Begrüßung -->
+
+        <section class="hero">
+
+            <h1>Was ist noch im Kühlschrank?</h1>
+
+            <p>
+                Verwalte deine Lebensmittel, behalte ihre Haltbarkeit
+                im Blick und finde passende Rezepte.
+            </p>
+
+        </section>
+
+
+        <!-- =========================
+             LEBENSMITTEL HINZUFÜGEN
+        ========================= -->
+
+        <section class="card">
+
+            <div class="card-header">
+
+                <div>
+                    <h2>🥕 Lebensmittel</h2>
+
+                    <p>
+                        Füge Lebensmittel hinzu und gib an,
+                        wann sie ablaufen.
+                    </p>
+                </div>
+
+                <button id="add-food-btn">
+                    + Hinzufügen
+                </button>
+
+            </div>
+
+
+            <!-- Beispiel-Lebensmittel -->
+
+            <div id="food-list">
+
+                <div class="food-item">
+
+                    <div class="food-icon">
+                        🥛
+                    </div>
+
+                    <div class="food-info">
+
+                        <strong>Milch</strong>
+
+                        <span>
+                            Haltbar bis: 12.09.2026
+                        </span>
+
+                    </div>
+
+                    <div class="food-status soon">
+                        Bald
+                    </div>
+
+                </div>
+
+
+                <div class="food-item">
+
+                    <div class="food-icon">
+                        🍎
+                    </div>
+
+                    <div class="food-info">
+
+                        <strong>Äpfel</strong>
+
+                        <span>
+                            Haltbar bis: 18.09.2026
+                        </span>
+
+                    </div>
+
+                    <div class="food-status">
+                        OK
+                    </div>
+
+                </div>
+
+
+                <div class="food-item">
+
+                    <div class="food-icon">
+                        🧀
+                    </div>
+
+                    <div class="food-info">
+
+                        <strong>Käse</strong>
+
+                        <span>
+                            Haltbar bis: 20.09.2026
+                        </span>
+
+                    </div>
+
+                    <div class="food-status">
+                        OK
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             REZEPTE
+        ========================= -->
+
+        <section class="card">
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>🍳 Rezepte</h2>
+
+                    <p>
+                        FridgeWise sucht Rezepte passend zu deinen
+                        vorhandenen Lebensmitteln.
+                    </p>
+
+                </div>
+
+                <button id="recipe-btn">
+                    🔎 Rezepte finden
+                </button>
+
+            </div>
+
+
+            <div id="recipe-list">
+
+                <div class="recipe-placeholder">
+
+                    <div class="placeholder-icon">
+                        🍳
+                    </div>
+
+                    <p>
+                        Noch keine Rezepte gefunden.
+                    </p>
+
+                    <span>
+                        FridgeWise wird später mithilfe von
+                        Embeddings passende Rezepte suchen.
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             EINKAUFSLISTE
+        ========================= -->
+
+        <section class="card">
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>🛒 Einkaufsliste</h2>
+
+                    <p>
+                        Fehlende Zutaten aus deinen Rezepten.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div id="shopping-list">
+
+                <div class="shopping-item">
+
+                    <input type="checkbox">
+
+                    <span>Mehl</span>
+
+                </div>
+
+                <div class="shopping-item">
+
+                    <input type="checkbox">
+
+                    <span>Eier</span>
+
+                </div>
+
+                <div class="shopping-item">
+
+                    <input type="checkbox">
+
+                    <span>Zwiebeln</span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script src="/static/js/FridgeWise.js"></script>
+
+</body>
+
+</html>

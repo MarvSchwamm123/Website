@@ -1,3 +1,5 @@
 nicegui
 uvicorn
 fastapi
+pymongo
+pwdlib

@@ -1,0 +1,533 @@
+/* =========================
+   🥕 FRIDGEWISE
+========================= */
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+
+    min-height: 100vh;
+
+    font-family: Arial, sans-serif;
+
+    color: #202020;
+
+    background:
+        radial-gradient(
+            circle at top left,
+            #ffffff,
+            #f1f3f6 60%,
+            #e8ebef
+        );
+
+    overflow-x: hidden;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+#topbar {
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+    right: 0;
+
+    height: 70px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 30px;
+
+    background: rgba(255,255,255,0.75);
+
+    backdrop-filter: blur(18px);
+
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+
+    z-index: 1000;
+
+    box-sizing: border-box;
+}
+
+
+#logo {
+
+    position: absolute;
+
+    left: 50%;
+    transform: translateX(-50%);
+
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    font-size: 1.4rem;
+    font-weight: 800;
+
+    color: #222;
+}
+
+
+#user-area {
+
+    margin-left: auto;
+
+    font-size: 1.4rem;
+
+    cursor: pointer;
+}
+
+
+/* =========================
+   HOME BUTTON
+========================= */
+
+#home-btn {
+
+    padding: 10px 16px;
+
+    border: none;
+    border-radius: 12px;
+
+    background: rgba(0,0,0,0.06);
+
+    color: #222;
+
+    font-size: 15px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s,
+        transform 0.2s;
+}
+
+
+#home-btn:hover {
+
+    background: rgba(0,0,0,0.12);
+
+    transform: translateX(-2px);
+}
+
+
+/* =========================
+   CONTENT
+========================= */
+
+#content {
+
+    width: min(1000px, 90%);
+
+    margin: 0 auto;
+
+    padding-top: 130px;
+    padding-bottom: 100px;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+
+    margin-bottom: 50px;
+
+    text-align: center;
+}
+
+
+.hero h1 {
+
+    margin: 0 0 15px;
+
+    font-size: 3rem;
+
+    font-weight: 900;
+
+    background:
+        linear-gradient(
+            180deg,
+            #222,
+            #777
+        );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+.hero p {
+
+    margin: 0 auto;
+
+    max-width: 650px;
+
+    font-size: 1.1rem;
+
+    line-height: 1.7;
+
+    color: #666;
+}
+
+
+/* =========================
+   CARDS
+========================= */
+
+.card {
+
+    margin-bottom: 30px;
+
+    padding: 30px;
+
+    border-radius: 26px;
+
+    background: rgba(255,255,255,0.72);
+
+    backdrop-filter: blur(18px);
+
+    border: 1px solid rgba(0,0,0,0.07);
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,0.06);
+}
+
+
+.card-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 25px;
+}
+
+
+.card-header h2 {
+
+    margin: 0 0 7px;
+
+    font-size: 1.5rem;
+}
+
+
+.card-header p {
+
+    margin: 0;
+
+    color: #777;
+
+    line-height: 1.5;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.card button {
+
+    flex-shrink: 0;
+
+    padding: 12px 18px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #222;
+
+    color: white;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s,
+        opacity 0.2s;
+}
+
+
+.card button:hover {
+
+    transform: translateY(-2px);
+
+    opacity: 0.85;
+}
+
+
+/* =========================
+   FOOD ITEMS
+========================= */
+
+#food-list {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+
+.food-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 15px;
+
+    border-radius: 16px;
+
+    background: rgba(0,0,0,0.035);
+
+    transition:
+        background 0.2s,
+        transform 0.2s;
+}
+
+
+.food-item:hover {
+
+    background: rgba(0,0,0,0.06);
+
+    transform: translateX(3px);
+}
+
+
+.food-icon {
+
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: white;
+
+    font-size: 1.5rem;
+
+    box-shadow:
+        0 4px 12px rgba(0,0,0,0.06);
+}
+
+
+.food-info {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+
+    flex: 1;
+}
+
+
+.food-info strong {
+
+    font-size: 1rem;
+}
+
+
+.food-info span {
+
+    font-size: 0.85rem;
+
+    color: #888;
+}
+
+
+.food-status {
+
+    padding: 6px 10px;
+
+    border-radius: 999px;
+
+    background: rgba(0,0,0,0.06);
+
+    font-size: 0.8rem;
+
+    color: #555;
+}
+
+
+.food-status.soon {
+
+    background: rgba(255,180,0,0.15);
+
+    color: #a06a00;
+}
+
+
+/* =========================
+   RECIPES
+========================= */
+
+.recipe-placeholder {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 45px 20px;
+
+    text-align: center;
+
+    border-radius: 18px;
+
+    background: rgba(0,0,0,0.025);
+}
+
+
+.placeholder-icon {
+
+    font-size: 3rem;
+
+    margin-bottom: 10px;
+}
+
+
+.recipe-placeholder p {
+
+    margin: 0 0 8px;
+
+    font-weight: bold;
+}
+
+
+.recipe-placeholder span {
+
+    max-width: 500px;
+
+    color: #888;
+
+    font-size: 0.9rem;
+
+    line-height: 1.5;
+}
+
+
+/* =========================
+   SHOPPING LIST
+========================= */
+
+#shopping-list {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+
+.shopping-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 12px 15px;
+
+    border-radius: 12px;
+
+    background: rgba(0,0,0,0.035);
+}
+
+
+.shopping-item input {
+
+    width: 17px;
+    height: 17px;
+
+    cursor: pointer;
+}
+
+
+.shopping-item span {
+
+    font-size: 0.95rem;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+
+    #topbar {
+
+        padding: 0 15px;
+    }
+
+
+    #logo {
+
+        font-size: 1.1rem;
+    }
+
+
+    #content {
+
+        width: 92%;
+
+        padding-top: 110px;
+    }
+
+
+    .hero h1 {
+
+        font-size: 2.1rem;
+    }
+
+
+    .card {
+
+        padding: 20px;
+    }
+
+
+    .card-header {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+
+    .card button {
+
+        width: 100%;
+    }
+
+}

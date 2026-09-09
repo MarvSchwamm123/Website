@@ -1,211 +1,611 @@
-const header = document.getElementById("settings-header");
 let images = [];
-let settingsOpen = false;
 
 
-/*
-header.addEventListener("mousedown", (e) => {
-    dragging = true;
-
-    const rect = panel.getBoundingClientRect();
-
-    panel.style.transform = "none";
-
-    panel.style.left = rect.left + "loadLanguage";
-    panel.style.top = rect.top + "px";
-
-    offsetX = e.clientX - rect.left;
-    offsetY = e.clientY - rect.top;
-});
-
-document.addEventListener("mousemove", (e) => {
-    if (!dragging) return;
-
-    windowEl.style.left = (e.clientX - offsetX) + "px";
-    windowEl.style.top = (e.clientY - offsetY) + "px";
-});
-
-document.addEventListener("mouseup", () => {
-    dragging = false;
-});
-*/
 // =========================
-// 🚀 INIT (ALLES HIER DRIN!)
+// INIT
 // =========================
+
 window.addEventListener("DOMContentLoaded", () => {
 
-    const btn = document.getElementById("settings-btn");
-    const panel = document.getElementById("settings-panel");
-    const overlay = document.getElementById("settings-overlay");
+    // =========================
+    // SETTINGS
+    // =========================
 
-    const cats = document.querySelectorAll(".category");
-    const tabs = document.querySelectorAll(".tab");
+    const settingsBtn =
+        document.getElementById("settings-btn");
 
-    // -------------------------
-    // BUTTON OPEN / CLOSE
-    // -------------------------
-    btn.addEventListener("click", () => {
-        panel.classList.toggle("active");
-        overlay.classList.toggle("active");
-    });
+    const settingsPanel =
+        document.getElementById("settings-panel");
 
-    overlay.addEventListener("click", () => {
-        panel.classList.remove("active");
-        overlay.classList.remove("active");
-    });
+    const settingsOverlay =
+        document.getElementById("settings-overlay");
 
-    // -------------------------
-    // TABS
-    // -------------------------
-    cats.forEach(cat => {
-        cat.addEventListener("click", () => {
 
-            const tabId = cat.dataset.tab;
+    if (settingsBtn) {
+        settingsBtn.addEventListener("click", () => {
 
-            cats.forEach(c => c.classList.remove("active"));
-            cat.classList.add("active");
+            settingsPanel.style.display = "block";
+            settingsOverlay.classList.add("active");
 
-            tabs.forEach(t => t.classList.remove("active"));
-
-            const target = document.getElementById(tabId);
-            if (target) target.classList.add("active");
         });
-    });
+    }
 
-    // -------------------------
-    // DRAG
-    // -------------------------
-    setupDrag();
 
-    // -------------------------
-    // START
-    // -------------------------
-    const saved = localStorage.getItem("lang") || "de";
-    loadLanguage(saved);
+    if (settingsOverlay) {
+        settingsOverlay.addEventListener("click", () => {
+
+            settingsPanel.style.display = "none";
+            settingsOverlay.classList.remove("active");
+
+        });
+    }
+
+
+    // =========================
+    // DRAGGING
+    // =========================
+
+    setupDrag(
+        document.getElementById("settings-panel"),
+        document.getElementById("settings-header")
+    );
+
+    setupDrag(
+        document.getElementById("registration-panel"),
+        document.getElementById("registration-header")
+    );
+
+    setupDrag(
+        document.getElementById("login-panel"),
+        document.getElementById("login-header")
+    );
+
+
+    // =========================
+    // SPRACHE
+    // =========================
+
+    const savedLanguage =
+        localStorage.getItem("lang") || "en";
+
+    loadLanguage(savedLanguage||"en");
+
+
+    // =========================
+    // BILDER
+    // =========================
+
+    loadLanguage(savedLanguage);
     loadImages();
+    checkLogin();
+
+
+    // =========================
+    // REGISTRIERUNG
+    // =========================
+
+    const registrationForm =
+        document.getElementById("registration-form");
+
+
+    if (registrationForm) {
+
+        console.log("Registrierungsformular gefunden!");
+
+        registrationForm.addEventListener("submit", async (event) => {
+
+            event.preventDefault();
+            event.stopPropagation();
+
+            console.log("REGISTRIERUNG SUBMIT!");
+
+            const username =
+                document
+                    .getElementById("registration-username")
+                    .value
+                    .trim();
+
+            const email =
+                document
+                    .getElementById("registration-email")
+                    .value
+                    .trim();
+
+            const password =
+                document
+                    .getElementById("registration-password")
+                    .value;
+
+            const passwordConfirm =
+                document
+                    .getElementById("registration-password-confirm")
+                    .value;
+
+
+            if (password !== passwordConfirm) {
+
+                alert("Die Passwörter stimmen nicht überein.");
+
+                return;
+            }
+
+
+            try {
+
+                console.log("Sende an /api/register...");
+
+                const response =
+                    await fetch("/api/register", {
+
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+
+                        body: JSON.stringify({
+                            username: username,
+                            email: email,
+                            password: password
+                        })
+
+                    });
+
+
+                console.log(
+                    "HTTP Status:",
+                    response.status
+                );
+
+
+                const data =
+                    await response.json();
+
+
+                console.log(
+                    "FastAPI Antwort:",
+                    data
+                );
+
+
+                if (!response.ok) {
+
+                    alert(
+                        data.detail ||
+                        "Registrierung fehlgeschlagen."
+                    );
+
+                    return;
+                }
+
+
+                alert("Account erfolgreich erstellt!");
+
+
+                registrationForm.reset();
+
+                closeRegistrationPanel();
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Registrierungsfehler:",
+                    error
+                );
+
+                alert(
+                    "Der Server ist nicht erreichbar."
+                );
+
+            }
+
+        });
+
+    }
+
+    else {
+
+        console.error(
+            "REGISTRIERUNGSFORMULAR NICHT GEFUNDEN!"
+        );
+
+    }
+
+    const loginForm = document.getElementById("login-form");
+
+    console.log("LOGIN FORM:", loginForm);
+
+    if (loginForm) {
+        loginForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
+
+            console.log("LOGIN WURDE ABGESCHICKT");
+
+            const email = document.getElementById("login-email").value.trim();
+            const password = document.getElementById("login-password").value;
+
+            console.log("EMAIL:", email);
+
+            const response = await fetch("/api/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                credentials: "include",
+                body: JSON.stringify({
+                    email: email,
+                    password: password
+                })
+            });
+
+            console.log("API ANTWORT:", response.status);
+            const data = await response.json();
+            console.log("API DATA:", data);
+
+            if (!response.ok) {
+                alert(data.detail || "Login fehlgeschlagen.");
+                return;
+            }
+
+            console.log("LOGIN ERFOLGREICH");
+
+            // Login-Fenster schließen
+            closeLoginPanel();
+
+            // Login-Status aktualisieren
+            await checkLogin();
+
+            // Seite neu laden
+            window.location.reload();
+        });
+    }
+
 });
 
-// =========================
-// 🌍 LANGUAGE
-// =========================
 
 // =========================
-// 🖼 BACKGROUND (STABIL)
+// TABS
 // =========================
-async function loadImages() {
-    try {
-        const res = await fetch("/api/images");
-        images = await res.json();
 
-        console.log("Images geladen:", images);
+function showTab(tabName) {
 
-        if (!images || images.length === 0) {
-            console.warn("Keine Bilder gefunden!");
-            return;
-        }
+    console.log("Tab:", tabName);
 
-        nextImage();
-        setInterval(nextImage, 6000);
 
-    } catch (err) {
-        console.error("Image load failed:", err);
+    // Alle Tabs holen
+
+    const languageTab =
+        document.getElementById("language-tab");
+
+    const themeTab =
+        document.getElementById("theme-tab");
+
+    const accountTab =
+        document.getElementById("account-tab");
+
+
+    // ALLE Tabs verstecken
+
+    if (languageTab) {
+        languageTab.style.display = "none";
     }
+
+    if (themeTab) {
+        themeTab.style.display = "none";
+    }
+
+    if (accountTab) {
+        accountTab.style.display = "none";
+    }
+
+
+    // NUR gewünschten Tab anzeigen
+
+    if (tabName === "language" && languageTab) {
+        languageTab.style.display = "block";
+    }
+
+    if (tabName === "theme" && themeTab) {
+        themeTab.style.display = "block";
+    }
+
+    if (tabName === "account" && accountTab) {
+        accountTab.style.display = "block";
+    }
+
+
+    // Sidebar Active-Status
+
+    const categories =
+        document.querySelectorAll(
+            "#settings-sidebar .category"
+        );
+
+    categories.forEach(category => {
+        category.classList.remove("active");
+    });
+
+
+    const selectedCategory =
+        document.getElementById(
+            "settings-sidebar-" + tabName
+        );
+
+    if (selectedCategory) {
+        selectedCategory.classList.add("active");
+    }
+
 }
 
-function nextImage() {
-    const bg = document.getElementById("bg");
 
-    if (!bg) {
-        console.error("#bg NICHT gefunden!");
+// =========================
+// LOGIN
+// =========================
+
+function openLoginPanel() {
+
+    console.log("openLoginPanel()");
+
+    const loginPanel =
+        document.getElementById("login-panel");
+
+    const registrationPanel =
+        document.getElementById("registration-panel");
+
+
+    if (!loginPanel) {
+
+        console.error(
+            "FEHLER: login-panel nicht gefunden!"
+        );
+
         return;
     }
 
-    if (!images || images.length === 0) {
-        console.warn("Images noch leer");
+
+    // Registrierung schließen
+
+    if (registrationPanel) {
+        registrationPanel.style.display = "none";
+    }
+
+
+    // Login öffnen
+
+    loginPanel.style.display = "block";
+
+}
+
+
+function closeLoginPanel() {
+
+    const loginPanel =
+        document.getElementById("login-panel");
+
+    if (loginPanel) {
+        loginPanel.style.display = "none";
+    }
+
+}
+
+
+// =========================
+// REGISTRIERUNG
+// =========================
+
+function openRegistrationPanel() {
+
+    console.log("openRegistrationPanel()");
+
+    const registrationPanel =
+        document.getElementById("registration-panel");
+
+    const loginPanel =
+        document.getElementById("login-panel");
+
+
+    if (!registrationPanel) {
+
+        console.error(
+            "FEHLER: registration-panel nicht gefunden!"
+        );
+
         return;
     }
 
-    const i = Math.floor(Math.random() * images.length);
 
-    const url = images[i];
+    // Login schließen
 
-    console.log("Set background:", url);
+    if (loginPanel) {
+        loginPanel.style.display = "none";
+    }
 
-    bg.style.backgroundImage = `url('${url}')`;
-    bg.style.backgroundSize = "cover";
-    bg.style.backgroundPosition = "center";
+
+    // Registrierung öffnen
+
+    registrationPanel.style.display = "block";
+
 }
 
+
+function closeRegistrationPanel() {
+
+    const registrationPanel =
+        document.getElementById("registration-panel");
+
+    if (registrationPanel) {
+        registrationPanel.style.display = "none";
+    }
+
+}
+
+
 // =========================
-// 🪟 DRAG WINDOW
+// DRAG
 // =========================
-function setupDrag() {
-    const panel = document.getElementById("settings-panel");
-    const header = document.getElementById("settings-header");
+
+function setupDrag(panel, header) {
+
+    if (!panel || !header) {
+        return;
+    }
+
 
     let dragging = false;
+
     let offsetX = 0;
     let offsetY = 0;
 
-    header.addEventListener("mousedown", (e) => {
 
-        const rect = panel.getBoundingClientRect();
-
-        console.log("Maus:", e.clientX, e.clientY);
-        console.log("Fenster:", rect.left, rect.top);
-        console.log("Offset:", e.clientX - rect.left, e.clientY - rect.top);
+    header.addEventListener("mousedown", (event) => {
 
         dragging = true;
 
-        offsetX = e.clientX - rect.left;
-        offsetY = e.clientY - rect.top;
+        const rect =
+            panel.getBoundingClientRect();
+
+
+        offsetX =
+            event.clientX - rect.left;
+
+        offsetY =
+            event.clientY - rect.top;
+
+
+        panel.style.left =
+            rect.left + "px";
+
+        panel.style.top =
+            rect.top + "px";
+
+        panel.style.transform =
+            "none";
+
     });
 
-    document.addEventListener("mousemove", (e) => {
-        if (!dragging) return;
 
-        console.log(
-            e.clientX - offsetX,
-            e.clientY - offsetY
-        )
+    document.addEventListener("mousemove", (event) => {
 
-        panel.style.left = (e.clientX - offsetX) + "px";
-        panel.style.top = (e.clientY - offsetY) + "px";
+        if (!dragging) {
+            return;
+        }
+
+
+        panel.style.left =
+            (event.clientX - offsetX) + "px";
+
+        panel.style.top =
+            (event.clientY - offsetY) + "px";
+
     });
+
 
     document.addEventListener("mouseup", () => {
         dragging = false;
     });
+
 }
 
-function showTab(tab) {
 
-    document.getElementById("language-tab").style.display = "none";
-    document.getElementById("theme-tab").style.display = "none";
+// =========================
+// BACKGROUND
+// =========================
 
-    document.getElementById(tab + "-tab").style.display = "block";
+async function loadImages() {
 
-    document.querySelectorAll(".category").forEach(cat => {
-        cat.classList.remove("active");
-    });
+    try {
 
-    event.target.classList.add("active");
+        const response =
+            await fetch("/api/images");
+
+        images =
+            await response.json();
+
+
+        if (!images || images.length === 0) {
+            return;
+        }
+
+
+        nextImage();
+
+        setInterval(
+            nextImage,
+            6000
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Image load failed:",
+            error
+        );
+
+    }
+
 }
 
-function pressOnSettingsWindow() {
-    if (settingsOpen) {
-        document.getElementById("settings-panel").style.display = "none";
-        settingsOpen = false;
-    } else {
-        document.getElementById("settings-panel").style.display = "block";
-        settingsOpen = true;
+
+function nextImage() {
+
+    const bg =
+        document.getElementById("bg");
+
+
+    if (!bg || !images.length) {
+        return;
+    }
+
+
+    const index =
+        Math.floor(
+            Math.random() * images.length
+        );
+
+
+    bg.style.backgroundImage =
+        `url('${images[index]}')`;
+
+    bg.style.backgroundSize =
+        "cover";
+
+    bg.style.backgroundPosition =
+        "center";
+
+}
+
+async function checkLogin() {
+    try {
+        const response = await fetch("/api/me", {
+            credentials: "include"
+        });
+
+        const data = await response.json();
+
+        const status = document.getElementById("account-status");
+
+        if (!data.logged_in) {
+            console.log("Kein Benutzer angemeldet.");
+
+            if (status) {
+                status.textContent = "Nicht angemeldet";
+            }
+
+            return;
+        }
+
+        console.log("Angemeldet als:", data.username);
+        console.log("Rank:", data.rank);
+        console.log("Features:", data.allowed_features);
+
+        if (status) {
+            status.textContent = `Angemeldet als ${data.username}`;
+        }
+
+    } catch (error) {
+        console.error("Fehler beim Prüfen der Session:", error);
     }
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("settings-btn")
-        .addEventListener("click", pressOnSettingsWindow);
-
-    document.getElementById("settings-overlay")
-        .addEventListener("click", pressOnSettingsWindow);
-});

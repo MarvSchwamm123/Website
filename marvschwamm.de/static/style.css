@@ -76,6 +76,122 @@ html, body {
     padding-right: 10px;
 }
 
+
+#registration-panel,
+#login-panel {
+    display: none;
+    position: fixed;
+
+    width: 500px;
+    min-height: 350px;
+
+    z-index: 1100;
+}
+
+
+#registration-header,
+#login-header {
+    font-size: 1.5rem;
+    font-weight: bold;
+
+    margin-bottom: 20px;
+
+    cursor: move;
+}
+
+
+#registration-body,
+#login-body {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 30px;
+}
+
+
+/* Form */
+
+.account-form {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+
+.account-form label {
+    font-size: 0.9rem;
+}
+
+
+.account-form input {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 12px 15px;
+
+    border: 1px solid rgba(255, 255, 255, 0.15);
+
+    border-radius: 12px;
+
+    background: rgba(255, 255, 255, 0.06);
+
+    color: white;
+
+    outline: none;
+}
+
+
+.account-form input:focus {
+    border-color: rgba(159, 107, 255, 0.6);
+}
+
+
+.account-form button {
+    padding: 12px 20px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: rgba(159, 107, 255, 0.25);
+
+    color: white;
+
+    cursor: pointer;
+
+    transition: background 0.2s;
+}
+
+
+.account-form button:hover {
+    background: rgba(159, 107, 255, 0.4);
+}
+
+
+.account-link {
+    margin-top: 10px;
+
+    color: rgba(190, 160, 255, 1);
+
+    cursor: pointer;
+
+    text-decoration: underline;
+}
+
+
+.account-link:hover {
+    color: white;
+}
+
+
 .category {
     padding: 12px;
     margin-bottom: 8px;
@@ -244,3 +360,113 @@ html, body {
 }
 
 
+/* =========================
+   FRIDGEWISE SIDEBAR
+   ========================= */
+
+#fridgewise-sidebar {
+    position: fixed;
+
+    left: 0;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: 210px;
+    height: 70px;
+
+    z-index: 9000;
+
+    /* Wichtig:
+       Die gesamte Breite ist die Hover-Zone */
+    pointer-events: auto;
+}
+
+
+/* Die sichtbare Sidebar */
+
+#fridgewise-button {
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 55px;
+    height: 55px;
+
+    display: flex;
+    align-items: center;
+
+    overflow: hidden;
+
+    border-radius: 0 18px 18px 0;
+
+    background: rgba(255, 255, 255, 0.06);
+
+    backdrop-filter: blur(18px);
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-left: none;
+
+    cursor: pointer;
+
+    user-select: none;
+
+    transition:
+        width 0.35s ease,
+        background 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+
+/* Ausfahren, sobald Maus in der gesamten Zone ist */
+
+#fridgewise-sidebar:hover #fridgewise-button {
+    width: 210px;
+
+    background: rgba(255, 255, 255, 0.10);
+
+    box-shadow:
+        0 10px 40px rgba(0, 0, 0, 0.25);
+}
+
+
+/* Icon */
+
+#fridgewise-icon {
+    width: 55px;
+    min-width: 55px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 1.5rem;
+}
+
+
+/* Text */
+
+#fridgewise-text {
+    white-space: nowrap;
+
+    font-size: 1rem;
+    font-weight: 600;
+
+    opacity: 0;
+
+    transform: translateX(-10px);
+
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease;
+}
+
+
+/* Text erscheint beim Ausfahren */
+
+#fridgewise-sidebar:hover #fridgewise-text {
+    opacity: 1;
+
+    transform: translateX(0);
+}
