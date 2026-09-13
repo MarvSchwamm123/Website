@@ -359,12 +359,12 @@ html, body {
     cursor: pointer;
 }
 
-
 /* =========================
-   FRIDGEWISE SIDEBAR
-   ========================= */
+   🍎 APP SIDEBAR / DOCK
+========================= */
 
-#fridgewise-sidebar {
+#app-sidebar {
+
     position: fixed;
 
     left: 0;
@@ -372,82 +372,145 @@ html, body {
 
     transform: translateY(-50%);
 
-    width: 210px;
-    height: 70px;
+    /*
+       Unsichtbarer Bereich.
+       Dadurch muss die Maus nicht exakt
+       auf die kleine Bar zeigen.
+    */
+    width: 260px;
+    height: 180px;
 
     z-index: 9000;
 
-    /* Wichtig:
-       Die gesamte Breite ist die Hover-Zone */
+    display: flex;
+    align-items: center;
+
     pointer-events: auto;
 }
 
 
-/* Die sichtbare Sidebar */
+/* =========================
+   GLASS DOCK
+========================= */
 
-#fridgewise-button {
-    position: absolute;
+#sidebar-dock {
 
-    left: 0;
-    top: 0;
+    display: flex;
+    flex-direction: column;
+
+    gap: 6px;
+
+    padding: 7px;
+
+    /*
+       Anfangszustand:
+       Die Bar ist nur so breit wie die Icons.
+    */
 
     width: 55px;
+
+    border-radius: 0 22px 22px 0;
+
+    background: rgba(255,255,255,0.07);
+
+    backdrop-filter: blur(20px);
+
+    border: 1px solid rgba(255,255,255,0.10);
+    border-left: none;
+
+    box-shadow:
+        0 10px 40px rgba(0,0,0,0.18);
+
+    overflow: hidden;
+
+    transition:
+        width 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+        background 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+
+/* =========================
+   HOVER
+========================= */
+
+#app-sidebar:hover #sidebar-dock {
+
+    width: 220px;
+
+    background: rgba(255,255,255,0.11);
+
+    box-shadow:
+        0 15px 50px rgba(0,0,0,0.25);
+}
+
+
+/* =========================
+   SIDEBAR ITEM
+========================= */
+
+.sidebar-item {
+
+    width: 206px;
     height: 55px;
 
     display: flex;
     align-items: center;
 
-    overflow: hidden;
-
-    border-radius: 0 18px 18px 0;
-
-    background: rgba(255, 255, 255, 0.06);
-
-    backdrop-filter: blur(18px);
-
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-left: none;
+    border-radius: 16px;
 
     cursor: pointer;
 
     user-select: none;
 
     transition:
-        width 0.35s ease,
-        background 0.35s ease,
-        box-shadow 0.35s ease;
+        background 0.2s ease;
 }
 
 
-/* Ausfahren, sobald Maus in der gesamten Zone ist */
+.sidebar-item:hover {
 
-#fridgewise-sidebar:hover #fridgewise-button {
-    width: 210px;
-
-    background: rgba(255, 255, 255, 0.10);
-
-    box-shadow:
-        0 10px 40px rgba(0, 0, 0, 0.25);
+    background: rgba(255,255,255,0.10);
 }
 
 
-/* Icon */
+/* =========================
+   ICON
+========================= */
 
-#fridgewise-icon {
+.sidebar-icon {
+
     width: 55px;
     min-width: 55px;
 
+    height: 55px;
+
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
 
     font-size: 1.5rem;
+
+    /*
+       Die JS-Mausbewegung verändert
+       später diesen Wert.
+    */
+
+    transform: translate3d(0,0,0);
+
+    transition:
+        transform 0.12s ease-out;
 }
 
 
-/* Text */
+/* =========================
+   TEXT
+========================= */
 
-#fridgewise-text {
+.sidebar-label {
+
+    margin-left: 8px;
+
     white-space: nowrap;
 
     font-size: 1rem;
@@ -458,14 +521,13 @@ html, body {
     transform: translateX(-10px);
 
     transition:
-        opacity 0.25s ease,
+        opacity 0.22s ease,
         transform 0.25s ease;
 }
 
 
-/* Text erscheint beim Ausfahren */
+#app-sidebar:hover .sidebar-label {
 
-#fridgewise-sidebar:hover #fridgewise-text {
     opacity: 1;
 
     transform: translateX(0);

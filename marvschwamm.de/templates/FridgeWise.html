@@ -12,10 +12,6 @@
 
 <body>
 
-    <!-- =========================
-         HEADER
-    ========================= -->
-
     <header id="topbar">
 
         <button id="home-btn" onclick="window.location='/'">
@@ -33,120 +29,67 @@
     </header>
 
 
-    <!-- =========================
-         MAIN
-    ========================= -->
-
     <main id="content">
 
-        <!-- Begrüßung -->
+        <!-- HERO -->
 
         <section class="hero">
+
+            <div class="hero-badge">
+                ✨ Dein smarter Kühlschrank-Assistent
+            </div>
 
             <h1>Was ist noch im Kühlschrank?</h1>
 
             <p>
-                Verwalte deine Lebensmittel, behalte ihre Haltbarkeit
+                Speichere deine Lebensmittel, behalte ihre Haltbarkeit
                 im Blick und finde passende Rezepte.
             </p>
 
         </section>
 
 
-        <!-- =========================
-             LEBENSMITTEL HINZUFÜGEN
-        ========================= -->
+        <!-- STATISTIK -->
 
-        <section class="card">
+        <section class="stats-grid">
 
-            <div class="card-header">
+            <div class="stat-card">
 
-                <div>
-                    <h2>🥕 Lebensmittel</h2>
-
-                    <p>
-                        Füge Lebensmittel hinzu und gib an,
-                        wann sie ablaufen.
-                    </p>
+                <div class="stat-icon">
+                    🥕
                 </div>
 
-                <button id="add-food-btn">
-                    + Hinzufügen
-                </button>
+                <div>
+                    <strong id="food-count">0</strong>
+                    <span>Lebensmittel</span>
+                </div>
 
             </div>
 
 
-            <!-- Beispiel-Lebensmittel -->
+            <div class="stat-card warning">
 
-            <div id="food-list">
-
-                <div class="food-item">
-
-                    <div class="food-icon">
-                        🥛
-                    </div>
-
-                    <div class="food-info">
-
-                        <strong>Milch</strong>
-
-                        <span>
-                            Haltbar bis: 12.09.2026
-                        </span>
-
-                    </div>
-
-                    <div class="food-status soon">
-                        Bald
-                    </div>
-
+                <div class="stat-icon">
+                    ⏰
                 </div>
 
-
-                <div class="food-item">
-
-                    <div class="food-icon">
-                        🍎
-                    </div>
-
-                    <div class="food-info">
-
-                        <strong>Äpfel</strong>
-
-                        <span>
-                            Haltbar bis: 18.09.2026
-                        </span>
-
-                    </div>
-
-                    <div class="food-status">
-                        OK
-                    </div>
-
+                <div>
+                    <strong id="soon-count">0</strong>
+                    <span>Bald ablaufend</span>
                 </div>
 
+            </div>
 
-                <div class="food-item">
 
-                    <div class="food-icon">
-                        🧀
-                    </div>
+            <div class="stat-card">
 
-                    <div class="food-info">
+                <div class="stat-icon">
+                    🍳
+                </div>
 
-                        <strong>Käse</strong>
-
-                        <span>
-                            Haltbar bis: 20.09.2026
-                        </span>
-
-                    </div>
-
-                    <div class="food-status">
-                        OK
-                    </div>
-
+                <div>
+                    <strong id="recipe-count">0</strong>
+                    <span>Rezeptideen</span>
                 </div>
 
             </div>
@@ -154,23 +97,45 @@
         </section>
 
 
-        <!-- =========================
-             REZEPTE
-        ========================= -->
+        <div class="card-header">
+
+            <div>
+                <h2>🥕 Mein Kühlschrank</h2>
+
+                <p>
+                    Lebensmittel manuell oder automatisch
+                    per Kassenzettel hinzufügen.
+                </p>
+            </div>
+
+            <div class="food-actions">
+
+                <button id="receipt-btn">
+                    🧾 Kassenzettel
+                </button>
+
+                <button id="add-food-btn">
+                    + Lebensmittel
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- REZEPTE -->
 
         <section class="card">
 
             <div class="card-header">
 
                 <div>
-
-                    <h2>🍳 Rezepte</h2>
+                    <h2>🍳 Rezeptvorschläge</h2>
 
                     <p>
-                        FridgeWise sucht Rezepte passend zu deinen
-                        vorhandenen Lebensmitteln.
+                        FridgeWise nutzt deine vorhandenen Lebensmittel
+                        für passende Rezeptideen.
                     </p>
-
                 </div>
 
                 <button id="recipe-btn">
@@ -185,7 +150,7 @@
                 <div class="recipe-placeholder">
 
                     <div class="placeholder-icon">
-                        🍳
+                        🤖
                     </div>
 
                     <p>
@@ -193,8 +158,7 @@
                     </p>
 
                     <span>
-                        FridgeWise wird später mithilfe von
-                        Embeddings passende Rezepte suchen.
+                        Lass FridgeWise nach passenden Gerichten suchen.
                     </span>
 
                 </div>
@@ -204,51 +168,87 @@
         </section>
 
 
-        <!-- =========================
-             EINKAUFSLISTE
-        ========================= -->
+        <!-- EINKAUFSLISTE -->
 
         <section class="card">
 
             <div class="card-header">
 
                 <div>
-
                     <h2>🛒 Einkaufsliste</h2>
 
                     <p>
-                        Fehlende Zutaten aus deinen Rezepten.
+                        Dinge, die du noch einkaufen möchtest.
                     </p>
-
                 </div>
 
             </div>
 
 
-            <div id="shopping-list">
+            <div class="shopping-add">
 
-                <div class="shopping-item">
+                <input
+                    type="text"
+                    id="shopping-input"
+                    placeholder="Zutat suchen..."
+                    autocomplete="off"
+                >
 
-                    <input type="checkbox">
+                <button id="shopping-add-btn">
+                    + Hinzufügen
+                </button>
 
-                    <span>Mehl</span>
+            </div>
 
+
+            <div
+                id="shopping-suggestions"
+                class="shopping-suggestions"
+            ></div>
+
+
+            <div id="shopping-list"></div>
+
+        </section>
+
+
+        <!-- TECHNIK -->
+
+        <section class="card technology-card">
+
+            <div class="card-header">
+
+                <div>
+                    <h2>⚙️ FridgeWise MVP</h2>
+
+                    <p>
+                        Die Anwendung ist für die spätere KI-Anbindung vorbereitet.
+                    </p>
                 </div>
 
-                <div class="shopping-item">
+            </div>
 
-                    <input type="checkbox">
 
-                    <span>Eier</span>
+            <div class="technology-grid">
 
+                <div>
+                    <strong>🧠 KI</strong>
+                    <span>Azure OpenAI & Embeddings</span>
                 </div>
 
-                <div class="shopping-item">
+                <div>
+                    <strong>🔎 Suche</strong>
+                    <span>Semantische Rezeptsuche</span>
+                </div>
 
-                    <input type="checkbox">
+                <div>
+                    <strong>🗄️ Daten</strong>
+                    <span>MongoDB Zutaten & Vorrat</span>
+                </div>
 
-                    <span>Zwiebeln</span>
-
+                <div>
+                    <strong>🔌 Tools</strong>
+                    <span>MCP für Vorrat & Rezepte</span>
                 </div>
 
             </div>
@@ -259,8 +259,100 @@
 
 
     <!-- =========================
-         JAVASCRIPT
+        LEBENSMITTEL-MODAL
     ========================= -->
+
+    <div id="food-modal" class="modal hidden">
+
+        <div class="modal-content">
+
+            <button
+                class="modal-close"
+                id="food-modal-close"
+            >
+                ×
+            </button>
+
+
+            <h2>🥕 Lebensmittel hinzufügen</h2>
+
+            <p>
+                Suche eine Zutat aus deinem FridgeWise-Katalog.
+            </p>
+
+
+            <!-- ZUTATENSUCHE -->
+
+            <label for="ingredient-search">
+                Zutat
+            </label>
+
+            <div class="ingredient-search-wrapper">
+
+                <span>🔎</span>
+
+                <input
+                    id="ingredient-search"
+                    type="text"
+                    placeholder="z. B. Milch, Tomate, Käse..."
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+            <div
+                id="ingredient-results"
+                class="ingredient-results"
+            ></div>
+
+
+            <!-- AUSGEWÄHLTE ZUTAT -->
+
+            <div
+                id="selected-ingredient"
+                class="selected-ingredient hidden"
+            ></div>
+
+
+            <!-- WEITERE ANGABEN -->
+
+            <div id="food-details" class="hidden">
+
+                <label for="food-amount">
+                    Menge
+                </label>
+
+                <input
+                    id="food-amount"
+                    type="text"
+                    placeholder="z. B. 1 Packung"
+                >
+
+
+                <label for="food-date">
+                    Haltbar bis
+                </label>
+
+                <input
+                    id="food-date"
+                    type="date"
+                >
+
+
+                <button
+                    id="save-food-btn"
+                    class="modal-submit"
+                >
+                    Lebensmittel speichern
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
 
     <script src="/static/js/FridgeWise.js"></script>
 

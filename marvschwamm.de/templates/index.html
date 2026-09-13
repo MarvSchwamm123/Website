@@ -17,17 +17,29 @@
     <div id="overlay"></div>
 
     <!-- =========================
-     FRIDGEWISE SIDEBAR
-     ========================= -->
+        APP SIDEBAR
+    ========================= -->
 
-    <div id="fridgewise-sidebar">
+    <div id="app-sidebar">
 
-        <div
-            id="fridgewise-button"
-            onclick="window.location='/FridgeWise'"
-        >
-            <span id="fridgewise-icon">🥕</span>
-            <span id="fridgewise-text">FridgeWise</span>
+        <div id="sidebar-dock">
+
+            <div
+                class="sidebar-item"
+                onclick="window.location='/FridgeWise'"
+            >
+                <span class="sidebar-icon">🥕</span>
+                <span class="sidebar-label">FridgeWise</span>
+            </div>
+
+            <div
+                class="sidebar-item"
+                onclick="window.location='/aboutme'"
+            >
+                <span class="sidebar-icon">👤</span>
+                <span class="sidebar-label">About Me</span>
+            </div>
+
         </div>
 
     </div>

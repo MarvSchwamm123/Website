@@ -1,7 +1,3 @@
-/* =========================
-   🥕 FRIDGEWISE
-========================= */
-
 html,
 body {
     margin: 0;
@@ -30,7 +26,6 @@ body {
 ========================= */
 
 #topbar {
-
     position: fixed;
 
     top: 0;
@@ -58,10 +53,10 @@ body {
 
 
 #logo {
-
     position: absolute;
 
     left: 50%;
+
     transform: translateX(-50%);
 
     display: flex;
@@ -70,14 +65,12 @@ body {
     gap: 8px;
 
     font-size: 1.4rem;
-    font-weight: 800;
 
-    color: #222;
+    font-weight: 800;
 }
 
 
 #user-area {
-
     margin-left: auto;
 
     font-size: 1.4rem;
@@ -86,15 +79,11 @@ body {
 }
 
 
-/* =========================
-   HOME BUTTON
-========================= */
-
 #home-btn {
-
     padding: 10px 16px;
 
     border: none;
+
     border-radius: 12px;
 
     background: rgba(0,0,0,0.06);
@@ -105,14 +94,11 @@ body {
 
     cursor: pointer;
 
-    transition:
-        background 0.2s,
-        transform 0.2s;
+    transition: 0.2s;
 }
 
 
 #home-btn:hover {
-
     background: rgba(0,0,0,0.12);
 
     transform: translateX(-2px);
@@ -124,12 +110,12 @@ body {
 ========================= */
 
 #content {
-
     width: min(1000px, 90%);
 
     margin: 0 auto;
 
-    padding-top: 130px;
+    padding-top: 120px;
+
     padding-bottom: 100px;
 }
 
@@ -139,35 +125,39 @@ body {
 ========================= */
 
 .hero {
-
-    margin-bottom: 50px;
+    margin-bottom: 35px;
 
     text-align: center;
 }
 
 
-.hero h1 {
+.hero-badge {
+    display: inline-block;
 
+    margin-bottom: 15px;
+
+    padding: 7px 13px;
+
+    border-radius: 999px;
+
+    background: rgba(0,0,0,0.055);
+
+    color: #666;
+
+    font-size: 0.8rem;
+}
+
+
+.hero h1 {
     margin: 0 0 15px;
 
     font-size: 3rem;
 
     font-weight: 900;
-
-    background:
-        linear-gradient(
-            180deg,
-            #222,
-            #777
-        );
-
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
 }
 
 
 .hero p {
-
     margin: 0 auto;
 
     max-width: 650px;
@@ -181,11 +171,89 @@ body {
 
 
 /* =========================
+   STATISTIK
+========================= */
+
+.stats-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 15px;
+
+    margin-bottom: 30px;
+}
+
+
+.stat-card {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 18px;
+
+    border-radius: 20px;
+
+    background: rgba(255,255,255,0.65);
+
+    border: 1px solid rgba(0,0,0,0.06);
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.04);
+}
+
+
+.stat-icon {
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    background: rgba(0,0,0,0.045);
+
+    font-size: 1.4rem;
+}
+
+
+.stat-card div:last-child {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+
+.stat-card strong {
+    font-size: 1.5rem;
+}
+
+
+.stat-card span {
+    color: #888;
+
+    font-size: 0.82rem;
+}
+
+
+.stat-card.warning .stat-icon {
+    background: rgba(255,180,0,0.13);
+}
+
+
+/* =========================
    CARDS
 ========================= */
 
 .card {
-
     margin-bottom: 30px;
 
     padding: 30px;
@@ -204,7 +272,6 @@ body {
 
 
 .card-header {
-
     display: flex;
 
     align-items: center;
@@ -218,7 +285,6 @@ body {
 
 
 .card-header h2 {
-
     margin: 0 0 7px;
 
     font-size: 1.5rem;
@@ -226,7 +292,6 @@ body {
 
 
 .card-header p {
-
     margin: 0;
 
     color: #777;
@@ -239,8 +304,9 @@ body {
    BUTTONS
 ========================= */
 
-.card button {
-
+.card button,
+.modal-submit,
+#shopping-add-btn {
     flex-shrink: 0;
 
     padding: 12px 18px;
@@ -257,14 +323,13 @@ body {
 
     cursor: pointer;
 
-    transition:
-        transform 0.2s,
-        opacity 0.2s;
+    transition: 0.2s;
 }
 
 
-.card button:hover {
-
+.card button:hover,
+.modal-submit:hover,
+#shopping-add-btn:hover {
     transform: translateY(-2px);
 
     opacity: 0.85;
@@ -272,11 +337,10 @@ body {
 
 
 /* =========================
-   FOOD ITEMS
+   FOOD
 ========================= */
 
 #food-list {
-
     display: flex;
 
     flex-direction: column;
@@ -286,7 +350,6 @@ body {
 
 
 .food-item {
-
     display: flex;
 
     align-items: center;
@@ -299,14 +362,11 @@ body {
 
     background: rgba(0,0,0,0.035);
 
-    transition:
-        background 0.2s,
-        transform 0.2s;
+    transition: 0.2s;
 }
 
 
 .food-item:hover {
-
     background: rgba(0,0,0,0.06);
 
     transform: translateX(3px);
@@ -314,7 +374,6 @@ body {
 
 
 .food-icon {
-
     width: 45px;
     height: 45px;
 
@@ -335,7 +394,6 @@ body {
 
 
 .food-info {
-
     display: flex;
 
     flex-direction: column;
@@ -347,13 +405,11 @@ body {
 
 
 .food-info strong {
-
     font-size: 1rem;
 }
 
 
 .food-info span {
-
     font-size: 0.85rem;
 
     color: #888;
@@ -361,7 +417,6 @@ body {
 
 
 .food-status {
-
     padding: 6px 10px;
 
     border-radius: 999px;
@@ -375,18 +430,81 @@ body {
 
 
 .food-status.soon {
-
     background: rgba(255,180,0,0.15);
 
     color: #a06a00;
 }
 
 
+.food-status.today {
+    background: rgba(255,90,70,0.13);
+
+    color: #a33125;
+}
+
+
+.food-status.good {
+    background: rgba(0,0,0,0.06);
+
+    color: #555;
+}
+
+
+.delete-food,
+.delete-shopping {
+    border: none !important;
+
+    background: transparent !important;
+
+    color: #999 !important;
+
+    padding: 5px !important;
+
+    font-size: 18px !important;
+}
+
+
+.delete-food:hover,
+.delete-shopping:hover {
+    color: #222 !important;
+
+    transform: none !important;
+}
+
+
 /* =========================
-   RECIPES
+   EMPTY STATE
 ========================= */
 
+.empty-state {
+    padding: 35px 20px;
+
+    text-align: center;
+
+    border-radius: 18px;
+
+    background: rgba(0,0,0,0.025);
+
+    color: #888;
+}
+
+
+/* =========================
+   REZEPTE
+========================= */
+
+#recipe-list {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 12px;
+}
+
+
 .recipe-placeholder {
+    grid-column: 1 / -1;
 
     display: flex;
 
@@ -407,7 +525,6 @@ body {
 
 
 .placeholder-icon {
-
     font-size: 3rem;
 
     margin-bottom: 10px;
@@ -415,7 +532,6 @@ body {
 
 
 .recipe-placeholder p {
-
     margin: 0 0 8px;
 
     font-weight: bold;
@@ -423,7 +539,6 @@ body {
 
 
 .recipe-placeholder span {
-
     max-width: 500px;
 
     color: #888;
@@ -434,12 +549,310 @@ body {
 }
 
 
+.recipe-card {
+    padding: 20px;
+
+    border-radius: 18px;
+
+    background: rgba(0,0,0,0.035);
+
+    transition: 0.2s;
+}
+
+
+.recipe-card:hover {
+    transform: translateY(-3px);
+
+    background: rgba(0,0,0,0.055);
+}
+
+
+.recipe-card h3 {
+    margin: 0 0 8px;
+
+    font-size: 1.05rem;
+}
+
+
+.recipe-card p {
+    margin: 0 0 15px;
+
+    color: #777;
+
+    font-size: 0.88rem;
+
+    line-height: 1.5;
+}
+
+
+.recipe-meta {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+}
+
+
+.recipe-tag {
+    padding: 5px 9px;
+
+    border-radius: 999px;
+
+    background: white;
+
+    color: #666;
+
+    font-size: 0.75rem;
+}
+
+
+.recipe-priority {
+    margin-bottom: 12px;
+
+    color: #9b6800;
+
+    font-size: 0.78rem;
+
+    font-weight: bold;
+}
+
+
 /* =========================
-   SHOPPING LIST
+   ZUTATENSUCHE
 ========================= */
 
-#shopping-list {
+.ingredient-search-wrapper {
+    display: flex;
 
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 0 14px;
+
+    border: 1px solid rgba(0,0,0,0.1);
+
+    border-radius: 13px;
+
+    background: white;
+
+    box-sizing: border-box;
+}
+
+
+.ingredient-search-wrapper input {
+    width: 100%;
+
+    padding: 13px 0;
+
+    border: none;
+
+    outline: none;
+
+    font-size: 14px;
+
+    background: transparent;
+}
+
+
+.ingredient-results {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+
+    margin-top: 10px;
+
+    max-height: 220px;
+
+    overflow-y: auto;
+}
+
+
+.ingredient-result {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 11px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: rgba(0,0,0,0.035);
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition: 0.15s;
+}
+
+
+.ingredient-result:hover {
+    background: rgba(0,0,0,0.08);
+
+    transform: translateX(3px);
+}
+
+
+.ingredient-result-icon {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background: white;
+
+    font-size: 1.2rem;
+}
+
+
+.ingredient-result-info {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+
+.ingredient-result-info strong {
+    font-size: 0.9rem;
+}
+
+
+.ingredient-result-info span {
+    color: #999;
+
+    font-size: 0.75rem;
+}
+
+
+.selected-ingredient {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-top: 15px;
+
+    padding: 13px;
+
+    border-radius: 14px;
+
+    background: rgba(0,0,0,0.05);
+}
+
+
+.selected-ingredient-icon {
+    font-size: 1.5rem;
+}
+
+
+.selected-ingredient strong {
+    display: block;
+}
+
+
+.selected-ingredient span {
+    color: #888;
+
+    font-size: 0.8rem;
+}
+
+
+.change-ingredient {
+    margin-left: auto;
+
+    border: none;
+
+    background: transparent;
+
+    color: #777;
+
+    cursor: pointer;
+}
+
+
+/* =========================
+   EINKAUFSLISTE
+========================= */
+
+.shopping-add {
+    display: flex;
+
+    gap: 10px;
+
+    margin-bottom: 5px;
+}
+
+
+.shopping-add input {
+    min-width: 0;
+
+    flex: 1;
+
+    padding: 12px 14px;
+
+    border: 1px solid rgba(0,0,0,0.09);
+
+    border-radius: 12px;
+
+    background: rgba(255,255,255,0.7);
+
+    font-size: 14px;
+
+    outline: none;
+}
+
+
+.shopping-add input:focus {
+    border-color: rgba(0,0,0,0.25);
+}
+
+
+.shopping-suggestions {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+
+    margin-bottom: 12px;
+}
+
+
+.shopping-suggestion {
+    padding: 9px 12px;
+
+    border-radius: 10px;
+
+    background: rgba(0,0,0,0.035);
+
+    cursor: pointer;
+
+    font-size: 0.85rem;
+}
+
+
+.shopping-suggestion:hover {
+    background: rgba(0,0,0,0.08);
+}
+
+
+#shopping-list {
     display: flex;
 
     flex-direction: column;
@@ -449,7 +862,6 @@ body {
 
 
 .shopping-item {
-
     display: flex;
 
     align-items: center;
@@ -465,7 +877,6 @@ body {
 
 
 .shopping-item input {
-
     width: 17px;
     height: 17px;
 
@@ -474,8 +885,181 @@ body {
 
 
 .shopping-item span {
+    flex: 1;
 
     font-size: 0.95rem;
+}
+
+
+.shopping-item input:checked + span {
+    text-decoration: line-through;
+
+    color: #999;
+}
+
+
+/* =========================
+   TECHNOLOGIE
+========================= */
+
+.technology-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 12px;
+}
+
+
+.technology-grid > div {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+    padding: 16px;
+
+    border-radius: 15px;
+
+    background: rgba(0,0,0,0.035);
+}
+
+
+.technology-grid strong {
+    font-size: 0.9rem;
+}
+
+
+.technology-grid span {
+    color: #888;
+
+    font-size: 0.82rem;
+}
+
+
+/* =========================
+   MODAL
+========================= */
+
+.modal {
+    position: fixed;
+
+    inset: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(0,0,0,0.25);
+
+    backdrop-filter: blur(8px);
+
+    z-index: 2000;
+}
+
+
+.modal.hidden {
+    display: none;
+}
+
+
+.modal-content {
+    position: relative;
+
+    width: min(470px, 100%);
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    padding: 30px;
+
+    border-radius: 25px;
+
+    background: rgba(255,255,255,0.96);
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,0.18);
+
+    box-sizing: border-box;
+}
+
+
+.modal-content h2 {
+    margin: 0 0 8px;
+}
+
+
+.modal-content p {
+    margin: 0 0 25px;
+
+    color: #777;
+}
+
+
+.modal-content label {
+    display: block;
+
+    margin: 14px 0 6px;
+
+    font-size: 0.85rem;
+
+    font-weight: bold;
+
+    color: #555;
+}
+
+
+.modal-content input {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 12px 14px;
+
+    border: 1px solid rgba(0,0,0,0.1);
+
+    border-radius: 12px;
+
+    background: #fff;
+
+    font-size: 14px;
+
+    outline: none;
+}
+
+
+.modal-submit {
+    width: 100%;
+
+    margin-top: 20px;
+}
+
+
+.modal-close {
+    position: absolute;
+
+    top: 15px;
+    right: 15px;
+
+    width: 35px;
+    height: 35px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: rgba(0,0,0,0.05);
+
+    font-size: 20px;
+
+    cursor: pointer;
 }
 
 
@@ -486,39 +1070,38 @@ body {
 @media (max-width: 700px) {
 
     #topbar {
-
         padding: 0 15px;
     }
 
 
     #logo {
-
         font-size: 1.1rem;
     }
 
 
     #content {
-
         width: 92%;
 
-        padding-top: 110px;
+        padding-top: 105px;
     }
 
 
     .hero h1 {
-
         font-size: 2.1rem;
     }
 
 
-    .card {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
 
+
+    .card {
         padding: 20px;
     }
 
 
     .card-header {
-
         align-items: flex-start;
 
         flex-direction: column;
@@ -526,8 +1109,32 @@ body {
 
 
     .card button {
-
         width: 100%;
     }
 
+
+    #recipe-list,
+    .technology-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .shopping-add {
+        flex-direction: column;
+    }
+
+
+    #shopping-add-btn {
+        width: 100%;
+    }
+
+
+    .food-item {
+        flex-wrap: wrap;
+    }
+
+
+    .food-status {
+        font-size: 0.7rem;
+    }
 }
