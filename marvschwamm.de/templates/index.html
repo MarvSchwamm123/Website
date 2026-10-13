@@ -60,9 +60,20 @@
     <div id="settings-panel" class="glass">
 
         <div id="settings-header">
-            ⚙️ Einstellungen
-        </div>
+            <span>⚙️ Einstellungen</span>
 
+            <div class="settings-window-controls">
+                <button id="settings-minimize"
+                        type="button"
+                        aria-label="Minimieren"
+                        title="Minimieren">−</button>
+
+                <button id="settings-close"
+                        type="button"
+                        aria-label="Schließen"
+                        title="Schließen">×</button>
+            </div>
+        </div>
 
         <div id="settings-body">
 
@@ -111,7 +122,7 @@
                 >
 
                     <h2 id="settings-body-language">
-                        Loading...
+                        Language
                     </h2>
 
                     <button onclick="loadLanguage('de')">
@@ -134,7 +145,7 @@
                 >
 
                     <h2 id="settings-body-theme">
-                        Loading...
+                        Theme
                     </h2>
 
                     <button>
@@ -157,7 +168,7 @@
                     </h2>
 
                     <p id="account-status">
-                        Nicht angemeldet
+                        Not logged in
                     </p>
 
 
@@ -165,7 +176,7 @@
                         type="button"
                         onclick="openLoginPanel()"
                     >
-                        Anmelden
+                        login
                     </button>
 
 
@@ -173,7 +184,7 @@
                         type="button"
                         onclick="openRegistrationPanel()"
                     >
-                        Registrieren
+                        register
                     </button>
 
                 </div>
@@ -185,7 +196,10 @@
 
     </div>
 
-
+    <button id="settings-mini"
+        type="button"
+        aria-label="Einstellungen öffnen"
+        title="Einstellungen öffnen">⚙</button>
     <!-- =========================
          REGISTRATION PANEL
          ========================= -->
@@ -356,6 +370,10 @@
                     Gaming
                 </div>
 
+                <div class="tag">
+                    Game developing
+                </div>
+
             </div>
 
         </div>
@@ -372,14 +390,14 @@
                 </h1>
 
                 <p id="aboutme-text">
-                    Loading...
+                    Click here to visit my About Me page.
                 </p>
 
                 <div
                     id="aboutme-link"
                     onclick="window.location='/aboutme'"
                 >
-                    About Me öffnen
+                    Open the about me Site
                 </div>
 
             </div>
@@ -393,9 +411,12 @@
 
             <div class="glass">
 
-                <h1>
-                    Projects
-                </h1>
+                <section id="projects">
+                    <h2>Projects</h2>
+                    <div id="projects-list">
+                        Loading projects...
+                    </div>
+                </section>
 
             </div>
 

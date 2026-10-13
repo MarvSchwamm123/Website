@@ -532,3 +532,47 @@ html, body {
 
     transform: translateX(0);
 }
+
+/* TEST: Login und Registrierung */
+
+#registration-panel,
+#login-panel {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: min(500px, calc(100vw - 40px)) !important;
+    min-height: auto !important;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+#projects {
+    margin-top: 40px;
+}
+
+#projects-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+}
+
+.project-card {
+    padding: 20px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+}
+
+.project-card h3 {
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+
+.project-card p {
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+

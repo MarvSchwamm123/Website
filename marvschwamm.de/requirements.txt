@@ -5,3 +5,4 @@ pymongo
 pwdlib
 pydantic
 bson
+pwdlib[argon2]

@@ -345,59 +345,33 @@ function showTab(tabName) {
 // =========================
 
 function openLoginPanel() {
+    console.log("Login öffnen");
 
-    console.log("openLoginPanel()");
-
-    const loginPanel =
-        document.getElementById("login-panel");
-
-    const registrationPanel =
-        document.getElementById("registration-panel");
-
+    const loginPanel = document.getElementById("login-panel");
+    const registrationPanel = document.getElementById("registration-panel");
 
     if (!loginPanel) {
-
-        console.error(
-            "FEHLER: login-panel nicht gefunden!"
-        );
-
+        console.error("Element #login-panel wurde nicht gefunden.");
         return;
     }
-
-
-    // Registrierung schließen
 
     if (registrationPanel) {
         registrationPanel.style.display = "none";
     }
-
-
-    // Login öffnen
 
     loginPanel.style.display = "block";
-
 }
 
-
 function closeLoginPanel() {
-
-    const loginPanel =
-        document.getElementById("login-panel");
+    const loginPanel = document.getElementById("login-panel");
 
     if (loginPanel) {
         loginPanel.style.display = "none";
     }
-
 }
 
-
-// =========================
-// REGISTRIERUNG
-// =========================
-
 function openRegistrationPanel() {
-
-    console.log("openRegistrationPanel()");
+    console.log("Registrierung öffnen");
 
     const registrationPanel =
         document.getElementById("registration-panel");
@@ -405,41 +379,32 @@ function openRegistrationPanel() {
     const loginPanel =
         document.getElementById("login-panel");
 
-
     if (!registrationPanel) {
-
-        console.error(
-            "FEHLER: registration-panel nicht gefunden!"
-        );
-
+        console.error("Element #registration-panel wurde nicht gefunden.");
         return;
     }
-
-
-    // Login schließen
 
     if (loginPanel) {
         loginPanel.style.display = "none";
     }
 
-
-    // Registrierung öffnen
-
     registrationPanel.style.display = "block";
-
 }
 
-
 function closeRegistrationPanel() {
-
     const registrationPanel =
         document.getElementById("registration-panel");
 
     if (registrationPanel) {
         registrationPanel.style.display = "none";
     }
-
 }
+
+// Explizit global verfügbar machen
+window.openLoginPanel = openLoginPanel;
+window.closeLoginPanel = closeLoginPanel;
+window.openRegistrationPanel = openRegistrationPanel;
+window.closeRegistrationPanel = closeRegistrationPanel;
 
 
 // =========================
@@ -609,3 +574,86 @@ async function checkLogin() {
         console.error("Fehler beim Prüfen der Session:", error);
     }
 }
+
+async function loadProjects() {
+    const container = document.getElementById("projects-list");
+
+    if (!container) return;
+
+    try {
+        const response = await fetch("/static/js/Projects.md", {
+            cache: "no-store"
+        });
+
+        if (!response.ok) {
+            throw new Error("Projects.md konnte nicht geladen werden");
+        }
+
+        const markdown = await response.text();
+        const lines = markdown.split(/\r?\n/);
+        const fragment = document.createDocumentFragment();
+
+        let currentProject = null;
+        let description = "";
+
+        function saveProject() {
+            if (!currentProject) return;
+
+            const card = document.createElement("article");
+            card.className = "project-card";
+
+            const title = document.createElement("h3");
+            title.textContent = currentProject.title;
+            card.appendChild(title);
+
+            if (description.trim()) {
+                const paragraph = document.createElement("p");
+                paragraph.textContent = description.trim();
+                card.appendChild(paragraph);
+            }
+
+            for (const item of currentProject.details) {
+                const detail = document.createElement("p");
+                detail.textContent = item;
+                card.appendChild(detail);
+            }
+
+            fragment.appendChild(card);
+        }
+
+        for (const line of lines) {
+            if (line.startsWith("## ")) {
+                saveProject();
+
+                currentProject = {
+                    title: line.slice(3).trim(),
+                    details: []
+                };
+
+                description = "";
+            } else if (currentProject && line.startsWith("- ")) {
+                const value = line.slice(2).trim();
+                const match = value.match(/^\*\*(.+?):\*\*\s*(.*)$/);
+
+                if (match) {
+                    currentProject.details.push(
+                        `${match[1]}: ${match[2]}`
+                    );
+                } else {
+                    description += value + " ";
+                }
+            } else if (currentProject && line.trim()) {
+                description += line.trim() + " ";
+            }
+        }
+
+        saveProject();
+
+        container.replaceChildren(fragment);
+    } catch (error) {
+        console.error("Projects konnten nicht geladen werden:", error);
+        container.textContent = "Projects could not be loaded.";
+    }
+}
+
+document.addEventListener("DOMContentLoaded", loadProjects);
