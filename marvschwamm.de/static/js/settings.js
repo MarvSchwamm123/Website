@@ -11,14 +11,20 @@ window.addEventListener("DOMContentLoaded", () => {
     // SETTINGS
     // =========================
 
-    const settingsBtn =
-        document.getElementById("settings-btn");
 
-    const settingsPanel =
-        document.getElementById("settings-panel");
+    const settingsBtn = document.getElementById("settings-btn");
+    const settingsPanel = document.getElementById("settings-panel");
+    const settingsOverlay = document.getElementById("settings-overlay");
 
-    const settingsOverlay =
-        document.getElementById("settings-overlay");
+    const settingsCloseButton =
+        settingsPanel?.querySelector(".close-btn");
+
+    settingsCloseButton?.addEventListener("click", (event) => {
+        event.stopPropagation();
+
+        settingsPanel.style.display = "none";
+        settingsOverlay?.classList.remove("active");
+    });
 
 
     if (settingsBtn) {
@@ -26,29 +32,13 @@ window.addEventListener("DOMContentLoaded", () => {
 
             settingsPanel.style.display = "block";
             settingsOverlay.classList.add("active");
-
+            bringToFront(settingsPanel);
         });
     }
-
-
-    if (settingsOverlay) {
-        settingsOverlay.addEventListener("click", () => {
-
-            settingsPanel.style.display = "none";
-            settingsOverlay.classList.remove("active");
-
-        });
-    }
-
 
     // =========================
     // DRAGGING
     // =========================
-
-    setupDrag(
-        document.getElementById("settings-panel"),
-        document.getElementById("settings-header")
-    );
 
     setupDrag(
         document.getElementById("registration-panel"),
@@ -56,10 +46,16 @@ window.addEventListener("DOMContentLoaded", () => {
     );
 
     setupDrag(
+        document.getElementById("settings-panel"),
+        document.getElementById("settings-header")
+    );
+
+    setupDrag(
         document.getElementById("login-panel"),
         document.getElementById("login-header")
     );
 
+    
 
     // =========================
     // SPRACHE
@@ -269,6 +265,26 @@ window.addEventListener("DOMContentLoaded", () => {
 // TABS
 // =========================
 
+// Gemeinsame globale Funktion zum Schließen von Panels
+window.closePanel = function (panelId) {
+    const panel = document.getElementById(panelId);
+
+    if (!panel) {
+        console.warn(`Panel #${panelId} wurde nicht gefunden.`);
+        return;
+    }
+
+    panel.style.display = "none";
+    panel.classList.remove("active");
+
+    // Das Einstellungs-Overlay ebenfalls schließen
+    if (panelId === "settings-panel") {
+        document
+            .getElementById("settings-overlay")
+            ?.classList.remove("active");
+    }
+};
+
 function showTab(tabName) {
 
     console.log("Tab:", tabName);
@@ -360,14 +376,7 @@ function openLoginPanel() {
     }
 
     loginPanel.style.display = "block";
-}
-
-function closeLoginPanel() {
-    const loginPanel = document.getElementById("login-panel");
-
-    if (loginPanel) {
-        loginPanel.style.display = "none";
-    }
+    bringToFront(loginPanel);
 }
 
 function openRegistrationPanel() {
@@ -389,16 +398,28 @@ function openRegistrationPanel() {
     }
 
     registrationPanel.style.display = "block";
+    bringToFront(registrationPanel);
+}
+
+function closeLoginPanel() {
+    window.closePanel("login-panel");
 }
 
 function closeRegistrationPanel() {
-    const registrationPanel =
-        document.getElementById("registration-panel");
-
-    if (registrationPanel) {
-        registrationPanel.style.display = "none";
-    }
+    window.closePanel("registration-panel");
 }
+
+window.closeSettingsPanel = function () {
+    const panel = document.getElementById("settings-panel");
+    const overlay = document.getElementById("settings-overlay");
+
+    if (panel) {
+        panel.style.display = "none";
+        panel.classList.remove("active");
+    }
+
+    overlay?.classList.remove("active");
+};
 
 // Explizit global verfügbar machen
 window.openLoginPanel = openLoginPanel;
@@ -411,67 +432,56 @@ window.closeRegistrationPanel = closeRegistrationPanel;
 // DRAG
 // =========================
 
+
 function setupDrag(panel, header) {
-
-    if (!panel || !header) {
-        return;
-    }
-
+    if (!panel || !header) return;
 
     let dragging = false;
-
     let offsetX = 0;
     let offsetY = 0;
 
-
     header.addEventListener("mousedown", (event) => {
+        // Nicht ziehen, wenn ein Button angeklickt wird
+        if (event.target.closest("button")) return;
+
+        // Nur die linke Maustaste
+        if (event.button !== 0) return;
 
         dragging = true;
 
-        const rect =
-            panel.getBoundingClientRect();
+        const rect = panel.getBoundingClientRect();
 
+        offsetX = event.clientX - rect.left;
+        offsetY = event.clientY - rect.top;
 
-        offsetX =
-            event.clientX - rect.left;
+        // Aktuelle Position übernehmen
+        panel.style.left = `${rect.left}px`;
+        panel.style.top = `${rect.top}px`;
+        panel.style.right = "auto";
+        panel.style.bottom = "auto";
+        panel.style.transform = "none";
 
-        offsetY =
-            event.clientY - rect.top;
-
-
-        panel.style.left =
-            rect.left + "px";
-
-        panel.style.top =
-            rect.top + "px";
-
-        panel.style.transform =
-            "none";
-
+        event.preventDefault();
     });
-
 
     document.addEventListener("mousemove", (event) => {
+        if (!dragging) return;
 
-        if (!dragging) {
-            return;
-        }
+        const maxX = window.innerWidth - panel.offsetWidth;
+        const maxY = window.innerHeight - panel.offsetHeight;
 
+        const x = Math.max(0, Math.min(event.clientX - offsetX, maxX));
+        const y = Math.max(0, Math.min(event.clientY - offsetY, maxY));
 
-        panel.style.left =
-            (event.clientX - offsetX) + "px";
-
-        panel.style.top =
-            (event.clientY - offsetY) + "px";
-
+        panel.style.left = `${x}px`;
+        panel.style.top = `${y}px`;
     });
-
 
     document.addEventListener("mouseup", () => {
         dragging = false;
     });
-
 }
+
 
 
 // =========================
@@ -655,5 +665,50 @@ async function loadProjects() {
         container.textContent = "Projects could not be loaded.";
     }
 }
+
+
+/* =========================
+   FENSTER IN DEN VORDERGRUND
+========================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+    const panels = [
+        document.getElementById("settings-panel"),
+        document.getElementById("login-panel"),
+        document.getElementById("registration-panel")
+    ].filter(Boolean);
+
+    let highestZIndex = 10002;
+
+    panels.forEach(panel => {
+        panel.addEventListener("mousedown", () => {
+            highestZIndex++;
+
+            panel.style.zIndex = highestZIndex;
+        });
+
+        // Auch für Touchscreens
+        panel.addEventListener("touchstart", () => {
+            highestZIndex++;
+
+            panel.style.zIndex = highestZIndex;
+        }, { passive: true });
+    });
+});
+
+
+/* =========================
+   FENSTER IN DEN VORDERGRUND
+========================= */
+
+let highestZIndex = 10002;
+
+function bringToFront(panel) {
+    if (!panel) return;
+
+    highestZIndex++;
+    panel.style.zIndex = highestZIndex;
+}
+
 
 document.addEventListener("DOMContentLoaded", loadProjects);

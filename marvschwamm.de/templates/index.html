@@ -61,18 +61,7 @@
 
         <div id="settings-header">
             <span>⚙️ Einstellungen</span>
-
-            <div class="settings-window-controls">
-                <button id="settings-minimize"
-                        type="button"
-                        aria-label="Minimieren"
-                        title="Minimieren">−</button>
-
-                <button id="settings-close"
-                        type="button"
-                        aria-label="Schließen"
-                        title="Schließen">×</button>
-            </div>
+            <button type="button" class="close-btn" onclick="closeSettingsPanel()">x</button>
         </div>
 
         <div id="settings-body">
@@ -195,11 +184,6 @@
         </div>
 
     </div>
-
-    <button id="settings-mini"
-        type="button"
-        aria-label="Einstellungen öffnen"
-        title="Einstellungen öffnen">⚙</button>
     <!-- =========================
          REGISTRATION PANEL
          ========================= -->
@@ -207,7 +191,8 @@
     <div id="registration-panel" class="glass">
 
         <div id="registration-header">
-            📝 Registrierung
+            <span>📝 Registrierung</span>
+            <button type="button" class="close-btn" onclick="closeRegistrationPanel()">×</button>
         </div>
 
         <div id="registration-body">
@@ -283,7 +268,8 @@
     <div id="login-panel" class="glass">
 
         <div id="login-header">
-            🔐 Anmelden
+            <span>🔐 Anmelden</span>
+            <button type="button" class="close-btn" onclick="closeLoginPanel()">×</button>
         </div>
 
         <div id="login-body">

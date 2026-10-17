@@ -135,10 +135,13 @@ function updateTexts() {
     );
 
 
-    setText(
-        "settings-header",
-        "⚙️ " + t("settings")
+    const settingsTitle = document.querySelector(
+        "#settings-header > span"
     );
+
+    if (settingsTitle) {
+        settingsTitle.innerText = "⚙️ " + t("settings");
+    }
 
 
     setText(
@@ -216,102 +219,39 @@ const MAX_MOVE = 8;
 const INFLUENCE_RADIUS = 180;
 
 
-sidebar.addEventListener("mousemove", (event) => {
 
-    items.forEach(item => {
+if (sidebar) {
+    sidebar.addEventListener("mousemove", (event) => {
+        items.forEach(item => {
+            const label = item.querySelector(".sidebar-label");
+            if (!label) return;
 
-        const label =
-            item.querySelector(".sidebar-label");
+            const rect = label.getBoundingClientRect();
+            const textX = rect.left + rect.width / 2;
+            const textY = rect.top + rect.height / 2;
 
-        const rect =
-            label.getBoundingClientRect();
+            const dx = event.clientX - textX;
+            const dy = event.clientY - textY;
+            const distance = Math.sqrt(dx * dx + dy * dy);
 
+            let strength = 1 - distance / INFLUENCE_RADIUS;
+            strength = Math.max(0, Math.min(1, strength));
 
-        /*
-           Mittelpunkt des Textes
-        */
+            let moveX = 0;
+            if (distance > 0) {
+                moveX = (dx / distance) * MAX_MOVE * strength;
+            }
 
-        const textX =
-            rect.left + rect.width / 2;
-
-        const textY =
-            rect.top + rect.height / 2;
-
-
-        /*
-           Abstand Maus → Text
-        */
-
-        const dx =
-            event.clientX - textX;
-
-        const dy =
-            event.clientY - textY;
-
-        const distance =
-            Math.sqrt(
-                dx * dx +
-                dy * dy
-            );
-
-
-        /*
-           Stärke des Effekts
-        */
-
-        let strength =
-            1 - (distance / INFLUENCE_RADIUS);
-
-        strength = Math.max(
-            0,
-            Math.min(1, strength)
-        );
-
-
-        /*
-           Bewegung nur horizontal.
-
-           Dadurch wandert der Text
-           leicht zur Maus, ohne nach oben
-           oder unten zu springen.
-        */
-
-        let moveX = 0;
-
-        if (distance > 0) {
-
-            moveX =
-                (dx / distance)
-                * MAX_MOVE
-                * strength;
-        }
-
-
-        /*
-           Text bewegen
-        */
-
-        label.style.transform =
-            `translate3d(${moveX}px, 0, 0)`;
-
+            label.style.transform = `translate3d(${moveX}px, 0, 0)`;
+        });
     });
 
-});
-
-
-/*
-   Maus verlässt die Sidebar
-*/
-
-sidebar.addEventListener("mouseleave", () => {
-
-    items.forEach(item => {
-
-        const label =
-            item.querySelector(".sidebar-label");
-
-        label.style.transform =
-            "translate3d(0, 0, 0)";
+    sidebar.addEventListener("mouseleave", () => {
+        items.forEach(item => {
+            const label = item.querySelector(".sidebar-label");
+            if (label) {
+                label.style.transform = "translate3d(0, 0, 0)";
+            }
+        });
     });
-
-});
+}

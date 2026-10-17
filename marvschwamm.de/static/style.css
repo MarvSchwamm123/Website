@@ -7,14 +7,96 @@ html, body {
     color: rgb(255, 254, 254);
 }
 
+#settings-panel,
+#login-panel,
+#registration-panel {
+    position: fixed;
+    display: none;
+    box-sizing: border-box;
+    z-index: 10001;
+}
+
+#settings-panel {
+    width: min(700px, calc(100vw - 32px));
+    height: min(450px, calc(100vh - 32px));
+}
+
+#login-panel,
+#registration-panel {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(500px, calc(100vw - 40px));
+    min-height: auto;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+#settings-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+}
+
+#settings-overlay.active {
+    display: block;
+}
+
+#settings-header,
+#login-header,
+#registration-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    user-select: none;
+    cursor: move;
+    box-sizing: border-box;
+}
+
+#settings-header > span,
+#login-header > span,
+#registration-header > span {
+    flex: 1;
+    min-width: 0;
+}
+
+.close-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 30px;
+    width: 30px;
+    min-width: 30px;
+    height: 30px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: #ff5f57;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    transition: background 0.2s, transform 0.2s;
+}
+
+.close-btn:hover {
+    background: #e0443e;
+    transform: scale(1.08);
+}
+
 #content {
     display: flex;
-    flex-direction: column; /* untereinander */
-
-    align-items: center;    /* horizontal zentriert */
-
-    gap: 5%;              /* Abstand zwischen Inseln */
-
+    flex-direction: column;
+    align-items: center;   
+    gap: 5%;           
     padding-top: 100px;
     padding-bottom: 100px;
 }
@@ -23,10 +105,8 @@ html, body {
     position: fixed;
     width: 100%;
     height: 100%;
-
     background-size: cover;
     background-position: center;
-
     z-index: -2;
 }
 
@@ -34,33 +114,11 @@ html, body {
     position: fixed;
     width: 100%;
     height: 100%;
-
     background: radial-gradient(circle at top left,
         #2d1b4e,
         #070010 60%);
-
     opacity: 0.85;
-
     z-index: -1;
-}
-
-#settings-panel {
-    display: none;
-    position: fixed;
-
-    width: 700px;
-    height: 450px;
-
-    z-index: 1000;
-}
-
-#settings-header {
-    font-size: 1.5rem;
-    font-weight: bold;
-
-    margin-bottom: 20px;
-
-    cursor: move;
 }
 
 #settings-body {
@@ -70,134 +128,75 @@ html, body {
 
 #settings-sidebar {
     width: 200px;
-
     border-right: 1px solid rgba(255,255,255,0.1);
-
     padding-right: 10px;
 }
 
-
-#registration-panel,
-#login-panel {
-    display: none;
-    position: fixed;
-
-    width: 500px;
-    min-height: 350px;
-
-    z-index: 1100;
-}
-
-
-#registration-header,
-#login-header {
-    font-size: 1.5rem;
-    font-weight: bold;
-
-    margin-bottom: 20px;
-
-    cursor: move;
-}
-
-
 #registration-body,
+
 #login-body {
     display: flex;
     flex-direction: column;
-
     align-items: center;
-
     gap: 15px;
-
     padding: 30px;
 }
 
-
-/* Form */
-
 .account-form {
     width: 100%;
-
     display: flex;
     flex-direction: column;
-
     gap: 12px;
 }
-
 
 .account-form label {
     font-size: 0.9rem;
 }
 
-
 .account-form input {
     width: 100%;
-
     box-sizing: border-box;
-
     padding: 12px 15px;
-
     border: 1px solid rgba(255, 255, 255, 0.15);
-
     border-radius: 12px;
-
     background: rgba(255, 255, 255, 0.06);
-
     color: white;
-
     outline: none;
 }
-
 
 .account-form input:focus {
     border-color: rgba(159, 107, 255, 0.6);
 }
 
-
 .account-form button {
     padding: 12px 20px;
-
     border: none;
-
     border-radius: 12px;
-
     background: rgba(159, 107, 255, 0.25);
-
     color: white;
-
     cursor: pointer;
-
     transition: background 0.2s;
 }
-
 
 .account-form button:hover {
     background: rgba(159, 107, 255, 0.4);
 }
 
-
 .account-link {
     margin-top: 10px;
-
     color: rgba(190, 160, 255, 1);
-
     cursor: pointer;
-
     text-decoration: underline;
 }
-
 
 .account-link:hover {
     color: white;
 }
 
-
 .category {
     padding: 12px;
     margin-bottom: 8px;
-
     border-radius: 12px;
-
     cursor: pointer;
 }
 
@@ -211,21 +210,15 @@ html, body {
 
 #settings-content {
     flex: 1;
-
     padding-left: 20px;
 }
 
 .tab button {
     display: block;
-
     margin-top: 10px;
-
     padding: 10px 20px;
-
     border: none;
-
     border-radius: 12px;
-
     cursor: pointer;
 }
 
@@ -254,17 +247,12 @@ html, body {
 
 .glass {
     position: relative;
-
     width: 60vw;
     margin: 0 auto;
-
     padding: 30px;
-
     border-radius: 28px;
-
     background: rgba(255,255,255,0.05);
     backdrop-filter: blur(18px);
-
     border: 1px solid rgba(255,255,255,0.08);
     z-index: 10;
 }
@@ -272,7 +260,6 @@ html, body {
 .section {
     display: flex;
     justify-content: center;
-
     margin-top: 50px;
     margin-bottom: 50px;
 }
@@ -280,9 +267,7 @@ html, body {
 .title {
     font-size: 4rem;
     font-weight: 900;
-
     margin-bottom: 20px;
-
     background: linear-gradient(90deg, rgb(255, 255, 255), rgb(140, 85, 241));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -293,17 +278,14 @@ html, body {
     padding: 10px 18px;
     margin: 5px;
     border-radius: 999px;
-
     background: rgba(255,255,255,0.06);
     border: 1px solid rgba(255,255,255,0.08);
 }
 
-/* ⚙️ Settings */
 #settings {
     position: fixed;
     top: 20px;
     right: 20px;
-
     font-size: 2rem;
     cursor: pointer;
 }
@@ -312,25 +294,20 @@ html, body {
     position: fixed;
     top: 20px;
     right: 20px;
-
     font-size: 2rem;
     cursor: pointer;
-
-    z-index: 9999; /* 🔥 GANZ WICHTIG */
+    z-index: 9999;
 }
 
 #aboutme-link {
     display: inline-block;
     margin-top: 20px;
     padding: 10px 20px;
-
     background: rgba(255,255,255,0.1);
     border: 1px solid rgba(255,255,255,0.2);
     border-radius: 12px;
-
     color: white;
     text-decoration: none;
-
     transition: background 0.3s, border-color 0.3s;
 }
 
@@ -338,10 +315,8 @@ html, body {
     display: none;
     position: absolute;
     right: 0;
-
     background: rgba(0,0,0,0.7);
     padding: 10px;
-
     border-radius: 10px;
 }
 
@@ -352,200 +327,97 @@ html, body {
 #menu button {
     display: block;
     margin: 5px 0;
-
     background: none;
     color: white;
     border: none;
     cursor: pointer;
 }
 
-/* =========================
-   🍎 APP SIDEBAR / DOCK
-========================= */
 
 #app-sidebar {
-
     position: fixed;
-
     left: 0;
     top: 50%;
-
     transform: translateY(-50%);
-
-    /*
-       Unsichtbarer Bereich.
-       Dadurch muss die Maus nicht exakt
-       auf die kleine Bar zeigen.
-    */
     width: 260px;
     height: 180px;
-
     z-index: 9000;
-
     display: flex;
     align-items: center;
-
     pointer-events: auto;
 }
 
-
-/* =========================
-   GLASS DOCK
-========================= */
-
 #sidebar-dock {
-
     display: flex;
     flex-direction: column;
-
     gap: 6px;
-
     padding: 7px;
-
-    /*
-       Anfangszustand:
-       Die Bar ist nur so breit wie die Icons.
-    */
-
     width: 55px;
-
     border-radius: 0 22px 22px 0;
-
     background: rgba(255,255,255,0.07);
-
     backdrop-filter: blur(20px);
-
     border: 1px solid rgba(255,255,255,0.10);
     border-left: none;
-
     box-shadow:
         0 10px 40px rgba(0,0,0,0.18);
-
     overflow: hidden;
-
     transition:
         width 0.35s cubic-bezier(0.22, 1, 0.36, 1),
         background 0.35s ease,
         box-shadow 0.35s ease;
 }
 
-
-/* =========================
-   HOVER
-========================= */
-
 #app-sidebar:hover #sidebar-dock {
-
     width: 220px;
-
     background: rgba(255,255,255,0.11);
-
     box-shadow:
         0 15px 50px rgba(0,0,0,0.25);
 }
 
-
-/* =========================
-   SIDEBAR ITEM
-========================= */
-
 .sidebar-item {
-
     width: 206px;
     height: 55px;
-
     display: flex;
     align-items: center;
-
     border-radius: 16px;
-
     cursor: pointer;
-
     user-select: none;
-
     transition:
         background 0.2s ease;
 }
 
-
 .sidebar-item:hover {
-
     background: rgba(255,255,255,0.10);
 }
 
-
-/* =========================
-   ICON
-========================= */
-
 .sidebar-icon {
-
     width: 55px;
     min-width: 55px;
-
     height: 55px;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     font-size: 1.5rem;
-
-    /*
-       Die JS-Mausbewegung verändert
-       später diesen Wert.
-    */
-
     transform: translate3d(0,0,0);
-
     transition:
         transform 0.12s ease-out;
 }
 
-
-/* =========================
-   TEXT
-========================= */
-
 .sidebar-label {
-
     margin-left: 8px;
-
     white-space: nowrap;
-
     font-size: 1rem;
     font-weight: 600;
-
     opacity: 0;
-
     transform: translateX(-10px);
-
     transition:
         opacity 0.22s ease,
         transform 0.25s ease;
 }
 
-
 #app-sidebar:hover .sidebar-label {
-
     opacity: 1;
-
     transform: translateX(0);
-}
-
-/* TEST: Login und Registrierung */
-
-#registration-panel,
-#login-panel {
-    position: fixed !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    width: min(500px, calc(100vw - 40px)) !important;
-    min-height: auto !important;
-    max-height: 90vh;
-    overflow-y: auto;
-    box-sizing: border-box;
 }
 
 #projects {
@@ -575,4 +447,3 @@ html, body {
     line-height: 1.6;
     overflow-wrap: anywhere;
 }
-
